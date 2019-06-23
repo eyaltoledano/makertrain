@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  version_number: MyString
+  description: MyString
+  progress: MyString
+  release_date: 2019-06-22
+
+two:
+  version_number: MyString
+  description: MyString
+  progress: MyString
+  release_date: 2019-06-22
