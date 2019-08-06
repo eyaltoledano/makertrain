@@ -1,17 +1,6 @@
-Params: <%= params.inspect %>
-Session: <%= session[:user_id].inspect %>
 
-<hr>
-
-<% if session[:user_id] %>
-  <h1><%= @user.name %></h1>
-  <h2>Email: <%= @user.email %></h2>
-  <h2>UID: <%= @user.uid %></h2>
-  <img src="<%= @user.image %>">
-  <br>
-  <%= link_to "Logout", logout_path %>
+<% if logged_in? %>
+  <%= render partial: 'home_logged_in', locals: { user: @user } %>
 <% else %>
-  <%= link_to('Log in with GitHub', '/auth/github') %>
-  <br>
-  <%= link_to('Log in with ProductHunt', '/auth/producthunt') %>
+  <%= render partial: 'home_logged_out' %>
 <% end %>

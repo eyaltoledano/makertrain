@@ -1,0 +1,32 @@
+<nav class="navbar is-white">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://bulma.io">
+        <strong class="has-text-link">Makertrain</strong>
+      </a>
+      <div class="navbar-burger burger" data-target="navMenuColorwhite-example">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="navMenuColorwhite-example" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Home
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link_to "Log Out", logout_path, class: 'navbar-item' %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

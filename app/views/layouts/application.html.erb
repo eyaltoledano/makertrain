@@ -6,9 +6,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="has-background-light	">
+    <% if logged_in? %>
+      <%= render 'layouts/logged_in_navigation' %>
+    <% else %>
+      <%= render 'layouts/logged_out_navigation' %>
+    <% end %>
+
+    <div>
+      <%= yield %>
+    </div>
+
   </body>
 </html>
