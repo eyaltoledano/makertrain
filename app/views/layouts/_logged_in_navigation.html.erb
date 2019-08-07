@@ -1,37 +1,6 @@
-<nav class="navbar is-white">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <strong class="has-text-link">Makertrain</strong>
-      </a>
-      <div class="navbar-burger burger" data-target="navMenuColorwhite-example">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+<p><%= @user.username %> is logged in.</p>
+<%= link_to "Edit user", edit_user_path(@user) %>
+<%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
+<%= link_to "Log Out", logout_path, class: 'navbar-item' %>
 
-    <div id="navMenuColorwhite-example" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">
-          Home
-        </a>
-      </div>
-
-      <div class="navbar-end">
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">
-            <img src="<%= @user.image %>" alt="">
-          </a>
-          <div class="navbar-dropdown">
-            <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
-            <%= link_to "Log Out", logout_path, class: 'navbar-item' %>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</nav>
+<hr>

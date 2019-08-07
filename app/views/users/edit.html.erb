@@ -1,2 +1,20 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>Editing <%= @user.username %>'s settings</h1>
+
+<h4>Change Display name</h4>
+<%= form_for(@user) do |f| %>
+  <%= f.label :display_name %>
+  <%= f.text_field :display_name, placeholder: "Enter a display name" %>
+  <br>
+  <%= f.submit "Update profile" %>
+<% end %>
+
+<h4>Change password</h4>
+<%= form_for(@user) do |f| %>
+  <%= f.label :password, "New password" %>
+  <%= f.password_field :password, placeholder: "Enter new password" %>
+  <br>
+  <%= f.label :password_confirmation, "Confirm password" %>
+  <%= f.password_field :password_confirmation, placeholder: "Confirm password" %>
+  <br>
+  <%= f.submit "Change password" %>
+<% end %>

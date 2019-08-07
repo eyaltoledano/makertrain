@@ -1,52 +1,5 @@
-<nav class="navbar is-white">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <strong class="has-text-link">Makertrain</strong>
-      </a>
-      <div class="navbar-burger burger" data-target="navMenuColorwhite-example">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+<p>You are logged out.</p>
+<%= link_to "Signup", signup_path, class: 'navbar-item' %>
+<%= link_to "Login", login_path, class: 'navbar-item' %>
 
-    <div id="navMenuColorwhite-example" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">
-          Home
-        </a>
-        
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control">
-              <a class="button" href="/auth/github">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Login</span>
-              </a>
-            </p>
-            <p class="control">
-              <a class="button" href="/auth/github">
-                <span class="icon">
-                  <i class="fab fa-product-hunt"></i>
-                </span>
-                <span>Login</span>
-              </a>
-            </p>
-            <p class="control">
-              <%= link_to "Signup", signup_path, class: 'navbar-item' %>
-            </p>
-            <p class="control">
-              <%= link_to "Login", login_path, class: 'navbar-item' %>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+<hr>

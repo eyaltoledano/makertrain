@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
         redirect_to dashboard_path
       end
     else
-      # normal login via login form
-      user = User.find(email: params[:email])
+      # normal login via login form (login with email or username)
+      params[:email].include?("@") ? user = User.find(email: params[:email]) : user = User.find(username: params[:username])
       if user && user.authenticate(params[:password])
         # if submission passes
         session[:user_id] = user.id

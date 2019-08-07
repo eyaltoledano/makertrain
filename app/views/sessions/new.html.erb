@@ -1,2 +1,16 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h1>Login to Makertrain</h1>
+
+<%= link_to "Login with GitHub", "/auth/github" %><br>
+<%= link_to "Login with ProductHunt", "/auth/producthunt" %>
+
+<br>
+
+<%= form_tag('/sessions') do %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email, nil, placeholder: "Username or email" %>
+  <br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password, nil, placeholder: "Password" %>
+  <br>
+  <%= submit_tag "Login" %>
+<% end %>
