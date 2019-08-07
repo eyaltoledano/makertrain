@@ -12,11 +12,11 @@ class SessionsController < ApplicationController
       else
         # new user via oauth
         @user = User.create do |u|
-          auth[:info][:username] ? u.username = auth[:info][:username] : u.username = auth[:info][:nickname]
+          u.username = auth[:info][:username]
           u.email = auth[:info][:email]
-          auth[:info][:image] ? u.image = auth[:info][:image] : u.image = auth[:info][:avatar]
+          u.image = auth[:info][:image]
           u.uid = auth[:uid]
-          # set a password for the user
+          # set a random password for new oauth users
           u.password = SecureRandom.hex
         end
         session[:user_id] = @user.id
@@ -24,7 +24,8 @@ class SessionsController < ApplicationController
       end
     else
       # normal login via login form (login with email or username)
-      params[:email].include?("@") ? user = User.find(email: params[:email]) : user = User.find(username: params[:username])
+      params[:email].include?("@") ? user = User.find_by(email: params[:email]) : user = User.find_by(username: params[:email])
+
       if user && user.authenticate(params[:password])
         # if submission passes
         session[:user_id] = user.id
