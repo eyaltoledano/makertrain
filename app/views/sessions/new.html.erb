@@ -1,16 +1,11 @@
-<h1>Login to Makertrain</h1>
+<div class="has-text-centered">
+  <h1 class="title">Login to Makertrain</h1>
+  <div>
+    <%= link_to "Login with GitHub", "/auth/github", class: 'button is-primary is-outlined' %>
+    <%= link_to "Login with ProductHunt", "/auth/producthunt", class: 'button is-primary is-outlined' %>
+  </div>
 
-<%= link_to "Login with GitHub", "/auth/github" %><br>
-<%= link_to "Login with ProductHunt", "/auth/producthunt" %>
-
-<br>
-
-<%= form_tag(sessions_path) do %>
-  <%= label_tag :email, "Username/Email" %>
-  <%= text_field_tag :email, nil, placeholder: "Username or email" %>
   <br>
-  <%= label_tag :password %>
-  <%= password_field_tag :password, nil, placeholder: "Password" %>
-  <br>
-  <%= submit_tag "Login" %>
-<% end %>
+
+  <%= render partial: 'shared/form' %>
+</div>

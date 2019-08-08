@@ -1,14 +1,50 @@
 <section class="hero is-white">
-  <h1 class="title has-text-centered">Signup</h1>
+  <h1 class="title has-text-centered">Start building on Makertrain</h1>
 
-  <%= form_for(@user) do |f|%>
-    <%= f.text_field :username, placeholder: "choose a username" %>
-    <br>
-    <%= f.text_field :email, placeholder: "your email address" %>
-    <br>
-    <%= f.password_field :password, placeholder: "enter a password" %>
-    <br>
-    <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
-    <br>
-    <%= f.submit "Create account" %>
-  <% end %>
+  <div class="text-center">
+    <%= link_to "Signup with GitHub", "/auth/github", class: 'button is-primary is-outlined' %>
+    <%= link_to "Signup with ProductHunt", "/auth/producthunt", class: 'button is-primary is-outlined' %>
+  </div>
+
+  <br>
+
+  <div class="columns">
+    <div class="column is-4 is-offset-4">
+      <%= form_for(@user) do |f|%>
+
+          <div class="form-group">
+            <div class="field">
+              <%= f.text_field :username, placeholder: "Choose a username", class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="field">
+              <%= f.text_field :email, placeholder: "Your email address", class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="field">
+              <%= f.password_field :password, placeholder: "Enter a password", class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="field">
+              <%= f.password_field :password_confirmation, placeholder: "Confirm password", class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="field is-grouped d-flex justify-content-center">
+            <div class="control">
+              <%= submit_tag "Create an account", class: 'button is-primary' %>
+            </div><br>
+            <div class="control">
+              <%= link_to "I already have an account", login_path, class: 'button is-text' %>
+            </div>
+          </div>
+
+      <% end %>
+    </div>
+  </div>

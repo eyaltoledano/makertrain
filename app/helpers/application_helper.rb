@@ -1,11 +1,11 @@
 module ApplicationHelper
   def flash_notices
-    if flash[:notice].present?
-      if flash[:notice].is_a? String
-        flash[:notice]
+    if flash.keys.present?
+      if flash.keys.count == 1
+       content_tag(:div, flash[:"#{flash.keys.first}"], class: ["alert", "alert-primary"])
       else
-        flash[:notice].errors.each do |error|
-          error.full_message
+        flash.keys.each do |key|
+          content_tag(:div, flash[:"#{key}"], class: ["alert", "alert-primary"])
         end
       end
     end

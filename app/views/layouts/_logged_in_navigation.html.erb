@@ -1,6 +1,40 @@
-<p><%= @user.username %> is logged in.</p>
-<%= link_to "Edit user", edit_user_path(@user) %>
-<%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
-<%= link_to "Log Out", logout_path, class: 'navbar-item' %>
+<nav class="navbar container" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item has-text-link" href="/">
+      <strong>Makertrain</strong>
+    </a>
 
-<hr>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <span class="badge badge-pill badge-dark">Logged in as <%= @user.username %></span>
+      </div>
+      <div class="navbar-item">
+        <a href="/users/<%=@user.id%>/edit">
+          <% if @user.image %>
+            <img src="<%= @user.image %>">
+          <% else %>
+            <%= link_to "Edit Profile", edit_user_path(@user) %>
+          <% end %>
+        </a>
+      </div>
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= link_to "Log Out", logout_path, class: 'button is-light' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
