@@ -1,20 +1,50 @@
-<h1>Editing <%= @user.username %>'s settings</h1>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Editing Settings
+      </h1>
+      <h2 class="subtitle">
+        <%= @user.username %> #<%= @user.id %>
+      </h2>
+    </div>
+  </div>
+</section>
 
-<h4>Change Display name</h4>
-<%= form_for(@user) do |f| %>
-  <%= f.label :display_name %>
-  <%= f.text_field :display_name, placeholder: "Enter a display name" %>
-  <br>
-  <%= f.submit "Update profile" %>
-<% end %>
+<div class="column is-4">
+  <%= form_for(@user) do |f| %>
+  <%= f.label :display_name, "Change display name", class: "label is-medium" %>
+  <div class="field is-grouped">
+    <p class="control">
+      <%= f.text_field :display_name, placeholder: "Enter a display name", class: "input" %>
+    </p>
+    <p class="control">
+      <%= f.submit "Update profile", class: "button" %>
+    </p>
+  </div>
+  <% end %>
+</div>
 
-<h4>Change password</h4>
-<%= form_for(@user) do |f| %>
-  <%= f.label :password, "New password" %>
-  <%= f.password_field :password, placeholder: "Enter a new password" %>
-  <br>
-  <%= f.label :password_confirmation, "Confirm password" %>
-  <%= f.password_field :password_confirmation, placeholder: "Confirm password" %>
-  <br>
-  <%= f.submit "Change password" %>
-<% end %>
+<div class="column is-4">
+
+  <%= form_for(@user) do |f| %>
+    <div class="field">
+      <%= f.label :password, "New password", class: "label is-medium" %>
+      <p class="control">
+        <%= f.password_field :password, placeholder: "Enter a new password", class: 'input' %>
+      </p>
+    </div>
+
+    <div class="field">
+      <p class="control">
+      <%= f.password_field :password_confirmation, placeholder: "Confirm password", class: 'input' %></p>
+    </div>
+
+    <div class="field">
+      <p class="control">
+        <%= f.submit "Change password", class: 'button' %>
+      </p>
+    </div>
+  <% end %>
+
+</div>

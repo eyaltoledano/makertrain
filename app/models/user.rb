@@ -8,6 +8,10 @@ class User < ApplicationRecord
   	self.username.gsub(" ", "-").downcase
   end
 
+  def has_no_products?
+    true if self.products.empty?
+  end
+
   def self.find_by_slug(slug)
   	self.all.find{ |instance| instance.slug == slug }
   end
@@ -45,6 +49,10 @@ class User < ApplicationRecord
     open_claimed_tasks.count
   end
 
+  def has_no_claimed_tasks?
+    true if open_claimed_tasks_count == 0
+  end
+
   def update_task_status(task, new_status)
     task.status = new_status
     task.save
@@ -79,5 +87,5 @@ class User < ApplicationRecord
   def has_items_for_review?
     tasks_for_review.count > 0 ? true : false
   end
-  
+
 end

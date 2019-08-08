@@ -1,18 +1,14 @@
 class UsersController < ApplicationController
   def dashboard
-    if !current_user
-      flash[:notice] = "You need to be logged in to access your dashboard."
-      redirect_to login_path
-    else
-      @user = current_user
-    end
+    set_current_user
+    redirect_if_not_logged_in
   end
 
   def index
   end
 
   def new
-    redirect to root_path if logged_in?
+    redirect_if_not_logged_in
     @user = User.new
   end
 
@@ -29,15 +25,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    set_current_user
   end
 
   def edit
-    if logged_in?
-      @user = current_user
-    else
-      flash[:notice] = "You need to be logged in to change your settings."
-      redirect_to login_path
-    end
+    set_current_user
+    redirect_if_not_logged_in
   end
 
 
@@ -51,9 +44,6 @@ class UsersController < ApplicationController
         flash[:notice] = "Something wrong happened."
         render :edit
       end
-    else
-      flash[:notice] = "You need to be logged in to change your profile settings."
-      redirect_to login_path
     end
   end
 

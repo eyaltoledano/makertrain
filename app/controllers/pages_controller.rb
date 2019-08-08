@@ -1,7 +1,5 @@
 class PagesController < ApplicationController
   def home
-    if logged_in?
-      @user = User.find(session[:user_id])
-    end
+    set_current_user
   end
 end

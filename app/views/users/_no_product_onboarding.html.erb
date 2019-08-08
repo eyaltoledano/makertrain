@@ -1,0 +1,18 @@
+<% if @user.has_no_products? %>
+<section>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="label is-medium">Create a product</h4>
+      <h6 class="lead mb-2 text-muted">Enlist the help of other makers to complete and launch your product</h6>
+      <p class="card-text">
+        Products are at the core of Makertrain. Makers across the community are searching for products to contribute to in exchange for cash and equity rewards. Create or import product tasks that you need completed to get started.
+      </p>
+
+      <div class="d-flex justify-content-end">
+        <%= link_to "Create a product", new_product_path, class: 'button is-link' %>
+      </div>
+
+    </div>
+  </div>
+</section>
+<% end %>
