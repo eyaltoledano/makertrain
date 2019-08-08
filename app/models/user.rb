@@ -92,4 +92,8 @@ class User < ApplicationRecord
     tasks_for_review.count > 0 ? true : false
   end
 
+  def items_for_review_count
+    tasks_for_review.count
+  end
+
 end

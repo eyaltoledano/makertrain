@@ -1,0 +1,23 @@
+<div class="tabs">
+  <ul>
+    <li class="<%= subnavigation_class_name("dashboard") %>">
+      <a>Dashboard</a>
+    </li>
+
+    <li class="<%= subnavigation_class_name("claimed") %>">
+      <a>My Claimed Tasks
+        <span class="tag">
+          <%= @user.open_claimed_tasks_count %>
+        </span>
+      </a>
+    </li>
+
+    <li class="<%= subnavigation_class_name("review") %>">
+      <a>Tasks to Review
+        <span class="tag">
+          <%= @user.items_for_review_count %>
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>

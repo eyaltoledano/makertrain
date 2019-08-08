@@ -31,4 +31,12 @@ module UsersHelper
   def pending_balance_class_name
     @user.pending_balance > 0 ? "tag is-warning is-large" : "tag is-dark is-large"
   end
+
+  def subnavigation_class_name(word)
+    # sets the value of the subnavigation li class so it shows as active if the user is currently on a page with the requested word
+    current_uri = request.env["PATH_INFO"]
+    if current_uri.include?(word)
+      "is-active"
+    end
+  end
 end

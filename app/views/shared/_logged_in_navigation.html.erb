@@ -13,7 +13,7 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
+      <%= link_to "Discover", products_path, class: 'navbar-item' %>
       </div>
     </div>
 
@@ -21,6 +21,7 @@
       <div class="navbar-item">
         <span class="badge badge-pill badge-dark">Logged in as <%= @user.username %></span>
       </div>
+      <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
       <div class="navbar-item">
         <a href="/users/<%=@user.id%>/edit">
           <% if @user.image %>
