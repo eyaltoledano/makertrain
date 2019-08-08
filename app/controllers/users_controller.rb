@@ -2,13 +2,18 @@ class UsersController < ApplicationController
   def dashboard
     set_current_user
     redirect_if_not_logged_in
+    @greeting = greeting_helper
+    @owned_products = @user.products.count
+    @user_owned_products = @user.products
+    @status_list = ["Researching", "Writing specs", "In progress", "Ready for Review"]
+    @review_status_list = ["Reviewing", "Accepted", "Rejected", "Completed"]
+    @user.balance.nil? ? @user.balance = 0 : @user.balance
   end
 
   def index
   end
 
   def new
-    redirect_if_not_logged_in
     @user = User.new
   end
 

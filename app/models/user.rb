@@ -4,6 +4,10 @@ class User < ApplicationRecord
   has_many :version_users
   has_many :versions, through: :version_users
 
+  def name
+    self.display_name? ? self.display_name : self.username
+  end
+
   def slug
   	self.username.gsub(" ", "-").downcase
   end

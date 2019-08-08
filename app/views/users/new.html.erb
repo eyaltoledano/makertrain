@@ -1,11 +1,7 @@
 <section class="hero is-white">
   <h1 class="title has-text-centered">Start building on Makertrain</h1>
 
-  <div class="text-center">
-    <%= link_to "Signup with GitHub", "/auth/github", class: 'button is-primary is-outlined' %>
-    <%= link_to "Signup with ProductHunt", "/auth/producthunt", class: 'button is-primary is-outlined' %>
-  </div>
-
+  <%= render 'shared/oauth_logins' %>
   <br>
 
   <div class="columns">
@@ -14,7 +10,12 @@
 
           <div class="form-group">
             <div class="field">
-              <%= f.text_field :username, placeholder: "Choose a username", class: 'form-control' %>
+              <div class="control has-icons-right">
+                <%= f.text_field :username, placeholder: "Choose a username", class: 'form-control' %>
+                <span class="icon is-small is-right">
+                  <i id="id_indicator">#<%= user_number %></i>
+                </span>
+              </div>
             </div>
           </div>
 
@@ -38,7 +39,7 @@
 
           <div class="field is-grouped d-flex justify-content-center">
             <div class="control">
-              <%= submit_tag "Create an account", class: 'button is-primary' %>
+              <%= submit_tag "Create an account", class: 'button is-link' %>
             </div><br>
             <div class="control">
               <%= link_to "I already have an account", login_path, class: 'button is-text' %>

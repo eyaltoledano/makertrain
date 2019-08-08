@@ -2,6 +2,11 @@
 <section>
   <div class="card">
     <div class="card-body">
+      <div class="d-flex justify-content-end">
+        <% if !@user.has_items_for_review? %>
+          <span class="tag is-light">You don't have any task submissions to review yet</span>
+        <% end %>
+      </div>
       <h4 class="label is-medium">Create a product</h4>
       <h6 class="lead mb-2 text-muted">Enlist the help of other makers to complete and launch your product</h6>
       <p class="card-text">

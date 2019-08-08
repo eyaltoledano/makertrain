@@ -2,8 +2,13 @@
 <section>
   <div class="card">
     <div class="card-body">
+      <div class="d-flex justify-content-end">
+        <% if @user.has_no_claimed_tasks? %>
+          <span class="tag is-light">You haven't claimed any tasks to work on yet</span>
+        <% end %>
+      </div>
       <h4 class="label is-medium">Claim your first task</h4>
-      <h6 class="lead mb-2 text-muted">Earn $USD and/or equity rewards for completing tasks</h6>
+      <h6 class="lead mb-2 text-muted">Earn $USD for co-building products (revshare rewards coming soon)</h6>
       <p class="card-text">
         You need to buy back your time to build products full-time. Makertrain helps you meet your revenue goals as a freelancer by earning cash rewards for micro-tasks across the community. When you've hit your weekly revenue goal, switch your attention to equity tasks to start building recurring income from products on the network.
       </p>
