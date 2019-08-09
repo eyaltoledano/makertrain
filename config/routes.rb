@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :users
   get '/dashboard' => 'users#dashboard'
   get '/signup' => 'users#new'
+  get '/review_tasks' => 'users#review'
+  get '/claimed_tasks' => 'users#claimed'
 
   resources :products
   resources :versions

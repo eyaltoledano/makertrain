@@ -28,6 +28,10 @@ class User < ApplicationRecord
     claimed_tasks
   end
 
+  def claimed_tasks_count
+    claimed_tasks.count
+  end
+
   def claimed_tasks_products # outputs array of products with claimed tasks
     products = []
     claimed_tasks.each do |task|

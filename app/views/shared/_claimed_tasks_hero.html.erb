@@ -1,30 +1,25 @@
-<section class="<%=dashboard_hero_class_name%>" id="dashboard_hero">
+<section class="hero is-bold" id="dashboard_hero">
   <div class="hero-body">
     <div class="container">
       <div class="columns">
-        <div class="column">
-          <h1 class="title">
-            <i class="em <%=@greeting[:emoji]%>"></i>
-            <%= @greeting[:text] %>, <%= @user.name %>
-          </h1>
-          <h2 class="subtitle">
-              <% if !@user.has_no_claimed_tasks? %>
-                <span class="tag is-link"><%= tasks_to_work_on_text %></span>
-              <% end %>
-
-              <% if @user.has_items_for_review? %>
-                <span class="tag is-warning"><%= open_tasks_for_review_text %></span>
-              <% end %>
-            </p>
-          </h2>
-        </div>
 
         <div class="column">
           <nav class="level">
             <div class="level-item has-text-centered">
               <div>
                 <p class="heading">Claimed Tasks</p>
-                <p class="title"><%= @user.open_claimed_tasks.count %></p>
+                <p class="title has-text-weight-semibold">
+                  <%= @user.claimed_tasks_count %>
+                </p>
+              </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Open Tasks</p>
+                <p class="title has-text-weight-semibold">
+                  <%= @user.open_claimed_tasks_count %>
+                </p>
               </div>
             </div>
 
@@ -36,19 +31,12 @@
                 </p>
               </div>
             </div>
+
             <div class="level-item has-text-centered">
               <div>
                 <p class="heading">Pending Rewards</p>
                 <p class="<%= pending_balance_class_name %>">
                   $<%= sprintf "%.2f", @user.pending_balance %>
-                </p>
-              </div>
-            </div>
-            <div class="level-item has-text-centered">
-              <div>
-                <p class="heading">Account Balance</p>
-                <p class="tag is-dark is-large">
-                  $<%= sprintf "%.2f", @user.balance %>
                 </p>
               </div>
             </div>

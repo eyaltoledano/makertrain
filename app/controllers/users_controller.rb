@@ -7,7 +7,18 @@ class UsersController < ApplicationController
     @user_owned_products = @user.products
     @status_list = ["Researching", "Writing specs", "In progress", "Ready for Review"]
     @review_status_list = ["Reviewing", "Accepted", "Rejected", "Completed"]
-    @user.balance.nil? ? @user.balance = 0 : @user.balance
+    support_nil_user_balance
+  end
+
+  def review
+    redirect_if_not_logged_in
+    set_current_user
+  end
+
+  def claimed
+    redirect_if_not_logged_in
+    set_current_user
+    support_nil_user_balance
   end
 
   def index

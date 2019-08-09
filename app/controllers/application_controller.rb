@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :set_current_user
   helper_method :redirect_if_not_logged_in
   helper_method :greeting_helper
+  helper_method :support_nil_user_balance
 
   def current_user
     User.find(session[:user_id])
@@ -30,12 +31,16 @@ class ApplicationController < ActionController::Base
   def greeting_helper
     time = Time.now.hour
     if time <= 11 || time == 0
-      @greeting = {text: "Have a productive day", emoji: "em-city_sunrise"}
+      @greeting = {text: "Have fun today", emoji: "em-city_sunrise"}
     elsif time >= 11 && time < 18
       @greeting = {text: "Good afternoon", emoji: "em-sun_with_face"}
     elsif time >= 18 && time < 24
-      @greeting = {text: "Happy moonlighting", emoji: "crescent_moon"}
+      @greeting = {text: "Happy moonlighting", emoji: "em-crescent_moon"}
     end
+  end
+
+  def support_nil_user_balance
+    @user.balance.nil? ? @user.balance = 0 : @user.balance
   end
 
 end
