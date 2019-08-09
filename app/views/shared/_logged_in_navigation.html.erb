@@ -1,6 +1,6 @@
 <nav class="navbar container" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item has-text-link" href="/">
+    <a class="navbar-item has-text-link " href="/">
       <strong>Makertrain</strong>
     </a>
 
@@ -22,15 +22,35 @@
         <span class="badge badge-pill badge-dark">Logged in as <%= @user.username %></span>
       </div>
       <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
+
       <div class="navbar-item">
-        <a href="/users/<%=@user.id%>/edit">
-          <% if @user.image %>
-            <img src="<%= @user.image %>">
-          <% else %>
-            <%= link_to "Edit Profile", edit_user_path(@user) %>
-          <% end %>
-        </a>
+        <div class="dropdown open">
+          <div type="button" id="dropdownMenu3" data-toggle="dropdown">
+            <img src="<%= @user.avatar_url %>">
+          </div>
+          <div class="dropdown-menu">
+            <h6 class="dropdown-header">Dropdown header</h6>
+            <a class="dropdown-item" href="#!">Action</a>
+            <a class="dropdown-item" href="#!">Another action</a>
+          </div>
+        </div>
       </div>
+
+      <div class="navbar-item">
+        <div class="dropdown open">
+          <button class="btn btn-primary btn-circle btn-circle-sm"
+                  type="button" id="dropdownMenu3" data-toggle="dropdown"
+                  >
+            <i class="fas fa-plus"></i>
+          </button>
+          <div class="dropdown-menu">
+            <h6 class="dropdown-header">Dropdown header</h6>
+            <a class="dropdown-item" href="#!">Action</a>
+            <a class="dropdown-item" href="#!">Another action</a>
+          </div>
+        </div>
+      </div>
+
       <div class="navbar-item">
         <div class="buttons">
           <%= link_to "Log Out", logout_path, class: 'button is-light' %>

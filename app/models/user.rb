@@ -8,6 +8,10 @@ class User < ApplicationRecord
     self.display_name? ? self.display_name : self.username
   end
 
+  def avatar_url
+    self.image? ? self.image : "https://api.adorable.io/avatars/285/#{self.email}.png"
+  end
+
   def slug
   	self.username.gsub(" ", "-").downcase
   end
