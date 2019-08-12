@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get '/review_tasks' => 'users#review'
   get '/claimed_tasks' => 'users#claimed'
 
+  get '/products/:slug' => 'products#show'
   resources :products
+  
   resources :versions
   resources :tasks
 
