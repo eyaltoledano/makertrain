@@ -42,7 +42,11 @@ class Version < ApplicationRecord
   def progress
     completed = []
     self.tasks.each {|task| completed << task if task.status == "Completed" }
-    result = completed.count.percent_of(self.tasks.count)
+    if completed.empty?
+      result = "0"
+    else
+      result = completed.count.percent_of(self.tasks.count)
+    end
     sprintf "%.0f", result
   end
 
@@ -53,4 +57,6 @@ class Version < ApplicationRecord
     end
     total_awarded = rewarded.inject(0){|sum,x| sum + x }
   end
+
+
 end

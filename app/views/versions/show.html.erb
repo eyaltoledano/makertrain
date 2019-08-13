@@ -19,7 +19,7 @@
             <div class="level-item has-text-centered">
               <div>
                 <p class="heading">Available Rewards</p>
-                <p class="title has-text-success">$<%= sprintf "%.2f", @available_rewards %></p>
+                <p class="title. has-text-success">$<%= sprintf "%.2f", 0 %></p>
               </div>
             </div>
             <div class="level-item has-text-centered">
@@ -32,10 +32,10 @@
               <div>
                 <p class="heading">Open Tasks</p>
                 <p class="title">
-                  <% if @open_tasks != 0 %>
-                    <a class="tag is-success is-large"><%= @open_tasks %></a>
+                  <% if @version.open_tasks.count > 0 %>
+                    <a class="tag is-success is-large"><%= @version.open_tasks.count %></a>
                   <% else %>
-                    <a class="tag is-danger is-large"><%= @open_tasks %></a>
+                    <a class="tag is-danger is-large"><%= @version.open_tasks.count %></a>
                   <% end %>
                 </p>
               </div>
@@ -59,11 +59,12 @@
 
 <!-- End hero unit -->
 
+
 <% if @version.tasks.empty? %>
 
 <!-- Start empty state -->
 
-<section class="container has-text-centered">
+<section class="container has-text-centered mt-4">
   <div id="versions-empty-state" class="columns is-vcentered">
     <div class="column">
       <h1 class="title">

@@ -33,7 +33,11 @@
             <% if !@user.products.empty? %>
               <% @user.products.each do |product| %>
                 <% unless product.id.nil? %>
-                  <%= link_to product.name, product_path(product), class: 'dropdown-item' %>
+                <div class="dropdown-item">
+                  <span class="tag"><%= product.versions.last.version_number %></span>
+                  <%= link_to product.name, product_path(product) %>
+
+                </div>
                 <% end %>
               <% end %>
             <% else %>

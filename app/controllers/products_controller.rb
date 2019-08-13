@@ -13,24 +13,62 @@ class ProductsController < ApplicationController
 
   def create
     set_current_user
-    if product_params[:name] == "" || product_params[:description] == "" || product_params[:git_repo] == ""
+    if product_params.any? == ""
       flash[:notice] = "You're missing some information. Let's try again."
       render :new
     else
       product_params[:name].chomp
-      @product = @user.products.build(product_params)
+      @product = Product.new(product_params)
       @product.status = "New"
-      @product.save
-      flash[:notice] = "#{@product.name} was successfully created!"
-      redirect_to product_path(@product)
+      @product.user = current_user
+      if @product.save
+        @version = @product.versions.build(version_params)
+        @version.user = @product.user
+        if @version.save
+          flash[:notice] = "#{@product.name} #{@version.version_number} was successfully created!"
+          redirect_to product_version_path(@product, @version)
+        else
+          flash[:notice] = "Something went wrong"
+          render :new
+        end
+      else
+        flash[:notice] = "Something went wrong"
+        render :new
+      end
     end
   end
 
   def show
     set_current_user
-    @product = Product.find(params[:id])
-    @user = @product.user
-    @versions = @product.versions
+
+    if params[:product_id].present?
+      @product = Product.find(params[:product_id])
+      @user = @product.user
+      @version = @product.versions.find(params[:id])
+    else
+      @product = Product.find(params[:id])
+      @user = @product.user
+    end
+
+    if !@version
+      @open_tasks = "0"
+      @available_rewards = "0"
+      @num_of_contributors = []
+    else
+      @open_tasks = @version.open_tasks.count
+
+      if !@version.tasks.empty?
+        rewards = []
+        @version.tasks.where(status: "Open").each do |task|
+          rewards << task.reward.to_f
+        end
+        @available_rewards = rewards.inject(0){|sum,x| sum + x }
+      else
+        @available_rewards = "0"
+      end
+
+      @num_of_contributors = @version.tasks_with_contributors
+    end
   end
 
   def edit
@@ -48,6 +86,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :website, :git_repo, :user_id)
+  end
+
+  def version_params
+    params.require(:product).permit(versions_attributes: [:version_number, :description, :release_date, :planned_budget]).values.first.values.first
   end
 
 end

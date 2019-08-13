@@ -48,12 +48,12 @@
               <div class="level-item has-text-centered">
                 <div>
                   <p class="heading">Current Version</p>
-                  <% if @product.versions.empty? || @product.versions.nil? %>
+                  <% if @product.versions.empty? %>
                     <p class="title">N/A</p>
                   <% else %>
                     <p class="title">
-                      <a class="button is-link is-large" id="product-current-version" href="/products/<%=@product.slug%>/versions/<%=@versions.last.version_number %>">
-                        <%=@product.name%> <%= @versions.last.version_number %>
+                      <a class="button is-link is-large" id="product-current-version" href="#">
+                        <%=@product.name%> <%= @product.versions.last.version_number %>
                       </a>
                     </p>
                   <% end %>
@@ -68,7 +68,7 @@
                       0
                     </a>
                     <% else %>
-                    <a class="tag is-success is-large" href="/products/<%=@product.slug%>/versions/<%=@product.versions.last.version_number%>">
+                    <a class="tag is-success is-large" href="#">
                       <%= @product.versions.last.open_tasks.count %>
                     </a>
                     <% end %>
@@ -132,7 +132,7 @@
 <section class="container" id="product-versions-table-section">
   <br>
   <h2 class="title"><%= @product.name %> Versions</h2>
-  <a href="/products/<%= @product.slug%>/new_version" class="button is-small">New version</a>
+  <%= link_to "New version", new_product_version_path(@product), class: 'button is-small' %>
 
   <table class="table">
     <thead>
@@ -151,7 +151,7 @@
       <% @product.versions.each do |version| %>
       <tr>
         <th><%= version.id %></th>
-        <td><a href="/products/<%=@product.slug%>/versions/<%= version.version_number %>" class="tag is-link">
+        <td><a href="/products/<%=@product.id%>/versions/<%= version.id %>" class="tag is-link">
           <%= @product.name %> <%= version.version_number %></a>
         </td>
         <td><%= version.description %></td>

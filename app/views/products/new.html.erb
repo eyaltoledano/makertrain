@@ -1,50 +1,112 @@
-<h1 class="title has-text-centered mt-4"><%= @user.username%> is creating a new product! &#127881;</h1>
+<%= render 'shared/subnavigation' %>
 
-<div class="column is-half is-offset-one-quarter">
-  <%= form_for(@product, html: {class: 'form'}) do |f| %>
+<h1 class="title has-text-centered mt-4"><%= @user.display_name%> is creating a new product! &#127881;</h1>
 
-    <div class="field">
-      <div class="control has-icons-left">
-        <span class="icon is-small is-left">
-          <i class="fas fa-rocket"></i>
-        </span>
-        <%= f.text_field :name, placeholder: "Give your product a name", class: 'input' %>
+<div class="columns">
+
+  <div class="column">
+    <%= form_for(@product, html: {class: 'form'}) do |f| %>
+
+      <div class="field">
+        <%= f.label :name, class: 'label' %>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="fas fa-rocket"></i>
+          </span>
+          <%= f.text_field :name, placeholder: "Give your product a unique and memorable name", class: 'input' %>
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control has-icons-left">
-        <span class="icon is-small is-left">
-          <i class="fas fa-comment-dollar"></i>
-        </span>
-        <%= f.text_field :description, placeholder: "What's the elevator pitch?", class: 'input' %>
+      <div class="field">
+        <%= f.label :description, class: 'label' %>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="fas fa-comment-dollar"></i>
+          </span>
+          <%= f.text_field :description, placeholder: "What's the elevator pitch for this new product?", class: 'input' %>
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control has-icons-left">
-        <span class="icon is-small is-left">
-          <i class="fas fa-external-link-alt"></i>
-        </span>
-        <%= f.text_field :website, placeholder: "Enter your website URL (Optional)", class: 'input' %>
+      <div class="field">
+        <%= f.label :website, class: 'label' %>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="fas fa-external-link-alt"></i>
+          </span>
+          <%= f.text_field :website, placeholder: "Enter a website URL for your product (Optional)", class: 'input' %>
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control has-icons-left">
-        <span class="icon is-small is-left">
-          <i class="fab fa-github"></i>
-        </span>
-        <%= f.text_field :git_repo, placeholder: "Enter a GitHub repository URL for the product", class: 'input' %>
-        <a class="help is-pulled-right" href="https://github.com/new" target="_blank"><i class="fab fa-github"></i> Create a new repository</a>
+      <div class="field">
+        <%= f.label :git_repo, class: 'label' %>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="fab fa-github"></i>
+          </span>
+          <%= f.text_field :git_repo, placeholder: "Enter a GitHub repository URL for the product", class: 'input' %>
+          <a class="help is-pulled-right" href="https://github.com/new" target="_blank"><i class="fab fa-github"></i> Create a new repository</a>
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control has-text-centered">
-        <%= f.submit "Create this product", class: "button is-link is-medium is-outlined" %>
-      </div>
-    </div>
+  </div>
+      <hr>
+  <div class="column">
 
-    <% end %>
+        <%= f.fields_for :versions do |v| %>
+
+          <div class="field">
+            <%= v.label :version_number, class: 'label' %>
+            <div class="control has-icons-left">
+              <span class="icon is-small is-left">
+                <i class="fas fa-code-branch"></i>
+              </span>
+              <%= v.text_field :version_number, class: 'input', readonly: 'true' %>
+            </div>
+          </div>
+
+        <div class="field">
+          <%= v.label :description, class: 'label' %>
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-info-circle"></i>
+            </span>
+            <%= v.text_field :description, placeholder: "Describe this version's main milestones and features" ,class: 'input' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= v.label :release_date, class: 'label' %>
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-calendar-alt"></i>
+            </span>
+            <%= v.text_field :release_date, placeholder: "Estimate a release date (i.e. January 1 2020)", class: 'input' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= v.label :planned_budget, class: 'label' %>
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-dollar-sign"></i>
+            </span>
+            <%= v.text_field :planned_budget, placeholder: "Define a total budget for this version", class: 'input' %>
+          </div>
+        </div>
+
+        <% end %>
+
+  </div>
+</div>
+<div class="column d-flex justify-content-center">
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link_to "Cancel", root_path, class: 'button is-text is-medium' %>
+    </div>
+    <div class="control">
+      <%= f.submit "Create this product", class: "button is-link is-medium" %>
+    </div>
+  </div>
+
+  <% end %>
 </div>

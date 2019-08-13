@@ -6,6 +6,7 @@ class VersionsController < ApplicationController
       @product = Product.find_by_slug(params[:product_id])
     end
     @user = @product.user
+    @version = Version.find(params[:id])
   end
 
   def new
