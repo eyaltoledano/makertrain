@@ -19,7 +19,7 @@
                   <span class="tag is-dark">founded by</span>
                   <span class="tag is-light">
                     <a href="/users/<%= @product.user.id %>">
-                      <%= @product.user.username %>
+                      <%= @product.user.display_name %>
                     </a>
                   </span>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
               </div>
               <div class="control">
-                <a href="<%= "http://@product.git_repo" %>">
+                <a href="<%= "http://#{@product.git_repo}" %>" target="_blank">
                   <i class="fab fa-github"></i>
                 </a>
               </div>
@@ -52,9 +52,7 @@
                     <p class="title">N/A</p>
                   <% else %>
                     <p class="title">
-                      <a class="button is-link is-large" id="product-current-version" href="#">
-                        <%=@product.name%> <%= @product.versions.last.version_number %>
-                      </a>
+                      <%= link_to "#{@product.name} #{@product.versions.last.version_number}", product_version_path(@product, @product.versions.last), class: 'button is-link is-large', id: 'product-current-version' %>
                     </p>
                   <% end %>
                 </div>
@@ -168,3 +166,15 @@
 <!-- End versions table -->
 
 <% end %>
+
+<section class="container" id="contributions-section">
+
+  <div class="columns">
+    <div class="column is-half">
+      <h4 class="subtitle">Contributors</h4>
+    </div>
+    <div class="column is-half">
+      <h4 class="subtitle">Contributions</h4>
+    </div>
+  </div>
+</section>
