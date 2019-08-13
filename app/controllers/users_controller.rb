@@ -21,6 +21,12 @@ class UsersController < ApplicationController
     support_nil_user_balance
   end
 
+  def owned_products
+    redirect_if_not_logged_in
+    set_current_user
+    @products = @user.products
+  end
+
   def index
   end
 

@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   get '/review_tasks' => 'users#review'
   get '/claimed_tasks' => 'users#claimed'
+  get '/portfolio' => 'users#owned_products'
 
   get '/products/:slug' => 'products#show'
   resources :products
-  
+
   resources :versions
   resources :tasks
 

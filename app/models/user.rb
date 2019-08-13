@@ -104,4 +104,8 @@ class User < ApplicationRecord
     tasks_for_review.count
   end
 
+  def number_of_products
+    self.products.count
+  end
+
 end

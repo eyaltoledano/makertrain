@@ -4,6 +4,24 @@
       <%= link_to "Dashboard", dashboard_path %>
     </li>
 
+    <li class="<%= subnavigation_class_name("portfolio") %>">
+      <a href="/portfolio">My Products
+        <span class="tag">
+          <%= @user.number_of_products %>
+        </span>
+      </a>
+    </li>
+
+    <% if @user.items_for_review_count > 0 %>
+    <li class="<%= subnavigation_class_name("review") %>">
+      <a href="/review_tasks">Tasks to Review
+        <span class="tag">
+          <%= @user.items_for_review_count %>
+        </span>
+      </a>
+    </li>
+    <% end %>
+
     <li class="<%= subnavigation_class_name("claimed") %>">
       <a href="/claimed_tasks">My Claimed Tasks
         <span class="tag">
@@ -12,12 +30,5 @@
       </a>
     </li>
 
-    <li class="<%= subnavigation_class_name("review") %>">
-      <a href="/review_tasks">Tasks to Review
-        <span class="tag">
-          <%= @user.items_for_review_count %>
-        </span>
-      </a>
-    </li>
   </ul>
 </div>
