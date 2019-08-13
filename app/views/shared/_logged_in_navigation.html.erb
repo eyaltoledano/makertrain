@@ -19,7 +19,7 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <span class="badge badge-pill badge-dark">Logged in as <%= @user.username %></span>
+        <a class="badge badge-pill badge-dark" href="/users/<%=@user.id%>">Logged in as <%= @user.username %></a>
       </div>
       <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
 
@@ -35,7 +35,7 @@
                 <% unless product.id.nil? %>
                 <div class="dropdown-item">
                   <span class="tag"><%= product.versions.last.version_number %></span>
-                  <%= link_to product.name, product_path(product) %>
+                  <%= link_to product.name, product_path(product.slug) %>
 
                 </div>
                 <% end %>

@@ -52,7 +52,7 @@
                     <p class="title">N/A</p>
                   <% else %>
                     <p class="title">
-                      <%= link_to "#{@product.name} #{@product.versions.last.version_number}", product_version_path(@product, @product.versions.last), class: 'button is-link is-large', id: 'product-current-version' %>
+                      <%= link_to "#{@product.name} #{@version.version_number}", product_version_path(@product.slug, @version.version_number), class: 'button is-link is-large', id: 'product-current-version' %>
                     </p>
                   <% end %>
                 </div>
@@ -67,7 +67,7 @@
                     </a>
                     <% else %>
                     <a class="tag is-success is-large" href="#">
-                      <%= @product.versions.last.open_tasks.count %>
+                      <%= @version.open_tasks.count %>
                     </a>
                     <% end %>
 
@@ -130,7 +130,7 @@
 <section class="container" id="product-versions-table-section">
   <br>
   <h2 class="title"><%= @product.name %> Versions</h2>
-  <%= link_to "New version", new_product_version_path(@product), class: 'button is-small' %>
+  <%= link_to "New version", new_product_version_path(@product.slug), class: 'button is-small' %>
 
   <table class="table">
     <thead>
@@ -149,8 +149,8 @@
       <% @product.versions.each do |version| %>
       <tr>
         <th><%= version.id %></th>
-        <td><a href="/products/<%=@product.id%>/versions/<%= version.id %>" class="tag is-link">
-          <%= @product.name %> <%= version.version_number %></a>
+        <td>
+          <%= link_to "#{@product.name} #{@version.version_number}", product_version_path(@product.slug, @version.version_number), class: 'tag is-link' %>
         </td>
         <td><%= version.description %></td>
         <td><%= version.progress %>%</td>

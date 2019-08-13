@@ -1,23 +1,15 @@
 class VersionsController < ApplicationController
   def show
-    if params[:product_id].to_i > 0
-      @product = Product.find(params[:product_id])
-    else
-      @product = Product.find_by_slug(params[:product_id])
-    end
+    set_current_user
+    @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
-    @version = Version.find(params[:id])
+    @version = Version.find_by_version_number(params[:version_number])
   end
 
   def new
     set_current_user
     redirect_if_not_logged_in
-    if params[:product_id].to_i > 0
-      @product = Product.find(params[:product_id])
-    else
-      @product = Product.find_by_slug(params[:product_id])
-    end
-
+    @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
 
     if current_user == !@product.user

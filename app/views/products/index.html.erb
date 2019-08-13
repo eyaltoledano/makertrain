@@ -12,9 +12,9 @@
     <tbody>
       <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.name, product_path(product) %></td>
+        <td><%= link_to product.name, product_path(product.slug) %></td>
         <td><%= product.status %>
-          
+
         </td>
         <td><%= link_to product.user.username, user_path(product.user) %></td>
         <td>soon</td>

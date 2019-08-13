@@ -41,13 +41,14 @@ class ProductsController < ApplicationController
   def show
     set_current_user
 
-    if params[:product_id].present?
-      @product = Product.find(params[:product_id])
+    if params[:version_number].present?
+      @product = Product.find_by_slug(params[:slug])
       @user = @product.user
-      @version = @product.versions.find(params[:id])
+      @version = @product.versions.find_by_version_number(params[:version_number])
     else
-      @product = Product.find(params[:id])
+      @product = Product.find_by_slug(params[:slug])
       @user = @product.user
+      @version = @product.versions.last
     end
 
     if !@version

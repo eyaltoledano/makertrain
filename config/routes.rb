@@ -16,10 +16,9 @@ Rails.application.routes.draw do
   get '/portfolio' => 'users#owned_products'
 
 
-  resources :products do
-      
-      get 'products/new_version' => 'versions#new'
-    resources :versions do
+  resources :products, param: :slug do
+    get ':slug/new_version' => 'versions#new'
+    resources :versions, param: :version_number do
       resources :tasks
     end
   end
