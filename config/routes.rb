@@ -15,10 +15,16 @@ Rails.application.routes.draw do
   get '/claimed_tasks' => 'users#claimed'
   get '/portfolio' => 'users#owned_products'
 
-  get '/products/:slug' => 'products#show'
-  resources :products
 
-  resources :versions
-  resources :tasks
+  resources :products do
+      
+      get 'products/new_version' => 'versions#new'
+    resources :versions do
+      resources :tasks
+    end
+  end
+
+
+
 
 end

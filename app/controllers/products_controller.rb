@@ -28,23 +28,9 @@ class ProductsController < ApplicationController
 
   def show
     set_current_user
-    # if the param after /products/ is a number, look for ID.
-    # if the param after /products/ is a string, look for a product whose slug is the same as params[:slug]
-    if params[:slug].to_i > 0
-      @product = Product.find(params[:slug])
-    else
-      returned_product = []
-      Product.all.each do |p|
-        returned_product << p if p.slug == params[:slug]
-      end
-
-      if returned_product.empty?
-        flash[:notice] = "This product doesn't exist."
-        redirect_to products_path
-      else
-        @product = returned_product.first
-      end
-    end
+    @product = Product.find(params[:id])
+    @user = @product.user
+    @versions = @product.versions
   end
 
   def edit

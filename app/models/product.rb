@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :user
   has_many :versions
+  
 
   def slug
   	self.name.gsub(" ", "-").downcase

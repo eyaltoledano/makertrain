@@ -17,16 +17,19 @@ gem 'rails-ujs', '~> 0.1.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
-gem 'pg'
-
 gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-producthunt', git: 'https://github.com/lukaszkorecki/omniauth-producthunt.git'
 
+group :product do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'sqlite3'
 end
 
 group :development do

@@ -1,0 +1,333 @@
+<!-- Start hero unit -->
+
+<section class="hero is-dark is-bold" id="dashboard_hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-half">
+          <h1 class="title">
+            <a class="has-text-white" href="/products/<%= @product.slug%>">
+              <%= "#{@product.name}"%>
+            </a> <% if @version %><span class="tag is-link is-medium is-bold "><%="#{@version.version_number}" %></span><% end %>
+          </h1>
+          <p class="subtitle">
+            <%= @version.description if @version %>
+          </p>
+        </div>
+        <div class="column">
+          <span class="level is-centered">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Available Rewards</p>
+                <p class="title has-text-success">$<%= sprintf "%.2f", @available_rewards %></p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Version Progress</p>
+                <p class="title"><%= @version.progress.to_i if @version%>%</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Open Tasks</p>
+                <p class="title">
+                  <% if @open_tasks != 0 %>
+                    <a class="tag is-success is-large"><%= @open_tasks %></a>
+                  <% else %>
+                    <a class="tag is-danger is-large"><%= @open_tasks %></a>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Contributors</p>
+
+                <a data-target="#contributorsModal" aria-haspopup="true" class="title modal-button tag is-link is-large">
+                  <%= @version.unique_contributors.count if @version %>
+                </a>
+                </a>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- End hero unit -->
+
+<% if @version.tasks.empty? %>
+
+<!-- Start empty state -->
+
+<section class="container has-text-centered">
+  <div id="versions-empty-state" class="columns is-vcentered">
+    <div class="column">
+      <h1 class="title">
+        Congratulations on starting <%= @version.version_number%> of <%= @product.name %>, <%= @product.user.username %>! &#127881;
+      </h1>
+      <h2 class="subtitle">
+        It's time to start adding tasks to <%= @version.version_number%>.
+      </h2>
+      <a data-target="#taskModal" aria-haspopup="true" id="open-modal" class="button is-info is-outlined is-medium modal-button">New task</a>
+
+      <!-- Route to new task page -
+      <a class="button is-info is-outlined is-medium" href="/<%= @product.slug %>/versions/<%= @version.version_number %>/new_task">Create a task for <%= @version.version_number%></a>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- End empty state -->
+
+<% else %>
+
+<!-- Start versions table -->
+
+<section class="container" id="version-tasks-table-section">
+  <br>
+  <h2 class="title">Tasks</h2>
+  <a data-target="#taskModal" aria-haspopup="true" class="button is-small modal-button">New task</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Reward</th>
+        <th>Contributor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @version.tasks.each do |task| %>
+      <tr>
+        <th><%= task.id %></th>
+        <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.id %>"><%= task.name %></a>
+        </td>
+        <td><%= task.description %></td>
+        <td>
+          <strong class="has-text-success">
+            $<%= sprintf "%.0f", task.reward %>
+          </strong>
+        </td>
+        <td>
+          <% if task.user.nil? %>
+          <a data-target="#claimModal-<%= task.id %>" aria-haspopup="true" class="title modal-button button is-success is-small">
+            Claim
+          </a>
+
+          <!-- Start Claim modal -->
+          <div class="modal" id="claimModal-<%= task.id %>">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">
+                  <strong class="has-text-link"><%=task.name%></strong>
+                </p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                <div class="container ">
+                  <div class="column">
+                    <p class="headline">
+                      <strong>Do you want to claim this task?</strong>
+
+                      <span class="is-small">To earn this task's $<%= task.reward%> reward, you'll have to submit a Github pull request and provide that link. If accepted by the owner of the product, your reward will be added to your balance.</span>
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <footer class="modal-card-foot">
+
+                <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/claim" method="post">
+                  <input type="hidden" name="_method" value="PATCH">
+
+                  <input class="button is-link" type="submit" value="Claim this task">
+                  </form>
+              </footer>
+            </div>
+          </div>
+          <!-- End Claim Modal -->
+
+          <% else%>
+          <a href="/users/<%= task.user.username %>">
+            <%= task.user.username %>
+          <% end %>
+          </a>
+        </td>
+        <td><%= task.status %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<!-- End versions table -->
+
+<% end %>
+
+<!-- Start new task modal -->
+
+<div class="modal" id="taskModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Create a new task for <%= @product.name%> <%= @version.version_number %></p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container has-text-centered">
+        <form class="form" id="new_task" action="/products/<%=@product.slug%>/versions/<%=@version.version_number%>/new_task" method="post">
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-pen"></i>
+                </span>
+                <input class="input" type="text" name="name" placeholder="Give your task a name">
+              </div>
+            </div>
+
+            <div class="field medium">
+              <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-tasks"></i>
+                </span>
+                <textarea class="input textarea" type="text" name="description" placeholder="Describe the new task in as much detail as you can." %></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-dollar-sign"></i>
+                </span>
+                <input class="input" type="text" name="reward" placeholder="What are you willing to pay to get this task completed? (USD)">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-code-branch"></i>
+                </span>
+                <input class="input" type="text" value="<%=@version.version_number%>" disabled>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-rocket"></i>
+                </span>
+                <input class="input" type="text" value="<%=@product.name%>" disabled>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control ">
+                <p><span class="icon is-small">
+                  <i class="fas fa-question-circle"></i>
+                </span> Have questions? <a href="mailto:<%= @product.user.email%>">Get in touch with <%= @product.user.username %></a></p>
+              </div>
+            </div>
+
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <input class="button is-success is-medium is-outlined has-text-centered" type="submit" id="submit-signup" value="Create task">
+    </footer>
+    </form>
+  </div>
+</div>
+
+<!-- End new task modal -->
+
+<!-- Start contributors modal -->
+
+<div class="modal" id="contributorsModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Users contributing to <%= @product.name%> <%= @version.version_number %></p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container has-text-centered">
+        <div class="columns">
+          <% if @version.tasks.empty? %>
+          <div class="column">
+            <p>This project can't have contributors if it doesn't have any tasks</p>
+          </div>
+          <% else %>
+            <% if !@version.tasks.empty? && @version.progress == 0%>
+            <div class="column has-text-centered">
+              <p>
+                <span class="tag is-link is-large">
+                  There are currently <%= @version.open_tasks.count %> open tasks for <%= @product.name %> <%= @version.version_number %>.
+                </span>
+                <br>
+                Close this window and claim a task to start earning. &#128176;
+              </p>
+            </div>
+
+              <% else %>
+                <% @version.unique_contributors.each do |contributor| %>
+                <div class="column is-one-third">
+                  <div class="card">
+                    <div class="card-content">
+                      <p class="subtitle">
+                        <a href="/users/<%= contributor.slug %>"><%= contributor.username %></a>
+                      </p>
+                      <p class="small">
+                        Digital Founder since <%= contributor.created_at.strftime("%B  %Y") %>
+                      </p>
+                    </div>
+                    <footer class="card-footer">
+                      <p class="card-footer-item">
+                        <span>
+                          <i class="fas fa-user-astronaut"></i>
+                          <a href="/users/<%= contributor.slug%>">Visit Profile</a>
+                        </span>
+                      </p>
+                    </footer>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+    </footer>
+  </div>
+</div>
+
+<!-- End Contributors Modal -->
+
+
+
+<!-- Start Modal Open/Close Button -->
+
+<script type="text/javascript">
+  document.querySelectorAll('.modal-button').forEach(function(el) {
+  el.addEventListener('click', function() {
+    var target = document.querySelector(el.getAttribute('data-target'));
+
+    target.classList.add('is-active');
+
+    target.querySelector('.delete').addEventListener('click',   function() {
+        target.classList.remove('is-active');
+     });
+  });
+});
+</script>
+
+<!-- End Modal Open/Close Button -->
