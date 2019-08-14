@@ -1,25 +1,3 @@
-<section>
-  <table class="table">
-    <thead class="head-light">
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Owner</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+<%= render '/shared/product_index_table' %>
 
-    <tbody>
-      <% @products.each do |product| %>
-      <tr>
-        <td><%= link_to product.name, product_path(product.slug) %></td>
-        <td><%= product.status %>
-
-        </td>
-        <td><%= link_to product.user.username, user_path(product.user) %></td>
-        <td>soon</td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</section>
+<%= render '/shared/modal_open_and_close' %>

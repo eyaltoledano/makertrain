@@ -18,7 +18,7 @@
             <div class="level-item has-text-centered">
               <div>
                 <p class="heading">Available Rewards</p>
-                <p class="title has-text-success">$<%= sprintf "%.2f", @version.available_rewards %></p>
+                <p class="title has-text-success"><%= money(@version.available_rewards) %></p>
               </div>
             </div>
             <div class="level-item has-text-centered">

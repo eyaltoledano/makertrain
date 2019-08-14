@@ -11,4 +11,8 @@ module ApplicationHelper
     end
   end
 
+  def money(number)
+    "$#{sprintf "%.2f", number}"
+  end
+
 end

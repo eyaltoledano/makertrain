@@ -10,4 +10,26 @@ class Product < ApplicationRecord
   def self.find_by_slug(slug)
   	self.all.find{ |instance| instance.slug == slug }
   end
+
+  def latest_version
+    self.versions.last
+  end
+
+  def latest_version_number
+    latest_version.version_number
+  end
+
+  def pretty_latest_version_number
+    number = self.versions.count
+    "Version #{number.to_s}"
+  end
+
+  def latest_version_contributors
+    latest_version.unique_contributors
+  end
+
+  def latest_version_contributor_count
+    latest_version_contributors.count
+  end
+  
 end
