@@ -4,9 +4,9 @@
       <tr>
         <th>Product</th>
         <th>Maker</th>
-        <th></th>
-        <th><%= @latest_version_number %> Contributors</th>
+        <th><%= @pretty_latest_version_number %> Progress</th>
         <th>Available Rewards</th>
+        <th><%= @latest_version_number %> Contributors</th>
       </tr>
     </thead>
 
@@ -24,12 +24,12 @@
         <td>
           <%= render partial: '/shared/progress_bar', locals: {product: product} %>
         </td>
+        <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number) %></td>
         <td>
           <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
-            <%= product.latest_version_contributor_count %> contributors
+            contributors
           </a>
         </td>
-        <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number) %></td>
       </tr>
 
 

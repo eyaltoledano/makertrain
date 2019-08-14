@@ -73,5 +73,12 @@ class Version < ApplicationRecord
     !valid_tasks.empty?
   end
 
+  def is_latest_version?
+    true if self == self.product.versions.last
+  end
+
+  def next_version_number
+    "v#{self.product.versions.count + 1}"
+  end
 
 end

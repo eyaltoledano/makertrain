@@ -1,0 +1,21 @@
+
+<div id="product-show-status">
+  <div class="card p-3 mt-4">
+    <p class="heading">Version History</p>
+    <ol class="progress-bar1">
+      <li class="is-complete"><span>Founded <%= time_month_date_year(@product.created_at) %></span></li>
+      <% @versions.each do |version| %>
+        <li class="<% if version.is_latest_version? %>is-active<%else%>is-complete<%end%>">
+          <span>Started <%= version.version_number %> <%= time_month_date_year(@version.created_at) %></span>
+        </li>
+
+        <% if version.is_latest_version? %>
+          <li>
+            <span><%= version.next_version_number %> Coming Soon</span>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+
+</div>

@@ -14,4 +14,8 @@ module ApplicationHelper
   def money(number)
     "$#{sprintf "%.2f", number}"
   end
+
+  def time_month_date_year(timestamp)
+    timestamp.strftime("%B %-d, %Y")
+  end
 end

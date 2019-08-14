@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
     set_current_user
     @products = Product.all
     @latest_version_number = @products.last.latest_version_number
+    @pretty_latest_version_number = @products.last.pretty_latest_version_number
   end
 
   def new
@@ -71,6 +72,7 @@ class ProductsController < ApplicationController
       end
 
       @num_of_contributors = @version.tasks_with_contributors
+      @versions = @product.versions
     end
   end
 

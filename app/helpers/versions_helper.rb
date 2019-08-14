@@ -32,5 +32,15 @@ module VersionsHelper
     # progress_hash {:available=>0.8, :in_progress=>0.1, :in_review=>0.05, :complete=>0.05}
   end
 
+  def progress_bar_class(status)
+    case status
+    when :available
+      "bg-info"
+    when :in_progress
+      "bg-warning"
+    when :complete
+      "bg-success"
+    end
+  end
 
 end
