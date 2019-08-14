@@ -50,6 +50,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def claim
+    @task = Task.find(claim_params[:task_id])
+    @version = @task.version
+    @product = @version.product
+    if @task.user.nil?
+      current_user.claim(@task)
+      flash[:success] = "You successfully claimed Task ##{@task.id}. gl hf!"
+      redirect_to product_version_path(@product.slug, @version.version_number)
+    else
+      flash[:notice] = "Something went wrong. Try again...?"
+    end
+  end
+
   def edit
     set_current_user
     redirect_if_not_logged_in
@@ -70,5 +83,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.permit(:name, :description, :reward, :product_slug, :version_version_number)
+  end
+
+  def claim_params
+    params.permit(:task_id)
   end
 end

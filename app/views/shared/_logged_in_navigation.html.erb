@@ -19,7 +19,7 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <a class="badge badge-pill badge-dark" href="/users/<%=@user.id%>">Logged in as <%= @user.username %></a>
+        <a class="badge badge-pill badge-dark" href="/users/<%=@user.id%>">Logged in as <%= @user.display_name %></a>
       </div>
       <%= link_to "Dashboard", dashboard_path, class: 'navbar-item' %>
 

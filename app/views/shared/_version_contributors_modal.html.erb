@@ -20,7 +20,7 @@
             <p class="mt-4"><%= link_to "Browse #{product.name}  #{product.latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: "tag is-large is-link" %></p>
           </div>
           <% else %>
-            <% if !version.tasks.empty? && version.progress != 100%>
+            <% if !version.tasks.empty? && version.unique_contributors.nil?%>
             <div class="column has-text-centered">
               <p>
                 <span class="tag is-link is-large">
@@ -33,26 +33,22 @@
 
               <% else %>
                 <% version.unique_contributors.each do |contributor| %>
-                <div class="column is-one-third">
-                  <div class="card">
-                    <div class="card-content">
-                      <p class="subtitle">
-                        <a href="/users/<%= contributor.slug %>"><%= contributor.username %></a>
-                      </p>
-                      <p class="small">
-                        Maker since <%= contributor.created_at.strftime("%B  %Y") %>
-                      </p>
+                <div class="container">
+                  <div class="column is-one-third">
+                    <div class="card">
+                      <div class="card-body">
+                        <p class="subtitle">
+                          <a href="/users/<%= contributor.slug %>"><%= contributor.display_name %></a>
+                        </p>
+                        <p class="small">
+                          Making since <%= contributor.created_at.strftime("%B  %Y") %>
+                        </p>
+                      </div>
+
                     </div>
-                    <footer class="card-footer">
-                      <p class="card-footer-item">
-                        <span>
-                          <i class="fas fa-user-astronaut"></i>
-                          <a href="/users/<%= contributor.slug%>">Visit Profile</a>
-                        </span>
-                      </p>
-                    </footer>
                   </div>
                 </div>
+
               <% end %>
             <% end %>
           <% end %>

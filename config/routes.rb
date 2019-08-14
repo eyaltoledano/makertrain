@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/review_tasks' => 'users#review'
   get '/claimed_tasks' => 'users#claimed'
   get '/portfolio' => 'users#owned_products'
+  post '/claim' => 'tasks#claim'
 
   resources :products, param: :slug do
     get ':slug/new_version' => 'versions#new'

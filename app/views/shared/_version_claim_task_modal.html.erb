@@ -20,11 +20,12 @@
     </section>
     <footer class="modal-card-foot d-flex justify-content-center py-5">
 
-      <form class="" action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/claim" method="post">
-        <input type="hidden" name="_method" value="PATCH">
+      <%= form_tag claim_path do %>
+        <%= hidden_field_tag "task_id", task.id %>
+        <%= submit_tag "Claim this task", class: 'button is-link is-large' %>
+      <% end %>
 
-        <input class="button is-link is-large" type="submit" value="Claim this task">
-        </form>
+
 
     </footer>
   </div>
