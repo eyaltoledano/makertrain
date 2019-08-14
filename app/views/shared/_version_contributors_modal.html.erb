@@ -4,7 +4,7 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Users contributing to <%= product.name%> <%= version.version_number %></p>
+      <p class="modal-card-title">Makers contributing to <%= product.name%> <%= version.version_number %></p>
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
@@ -16,7 +16,7 @@
           </div>
           <% elsif product.latest_version_contributor_count == 0%>
           <div class="column">
-            <p>This project doesn't have any contributors yet.</p>
+            <p><%= "#{product.name} #{version.version_number}" %> doesn't have any contributors yet.</p>
             <p class="mt-4"><%= link_to "Browse #{product.name}  #{product.latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: "tag is-large is-link" %></p>
           </div>
           <% else %>

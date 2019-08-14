@@ -1,0 +1,81 @@
+<!-- Start Status modal -->
+<div class="modal" id="statusModal-<%=task.id%>">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        <strong class="has-text-link"><%=task.name%></strong>
+        <label class="label">Current Status: <%= task.status %></label>
+
+      </p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container has-text-centered">
+        <div class="columns">
+          <div class="column ">
+            <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/update_status" method="post">
+
+            <div class="select">
+              <select id="status" class="input" type="text" name="status" placeholder="Choose a new status">
+                <option value="Select a new status">Select a new status</option>
+                <% @status_list.each do |status| %>
+                <option <% if status == task.status %> selected <%end%> value="<%= status %>"><%= status %></option>
+                <% end %>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="column is-three-fifths">
+            <div class="field">
+              <p class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fab fa-github"></i>
+                </span>
+                <input class="input" type="text" name="pr_link" <% if task.pr_link == "" %>placeholder="Pull Request URL (When Ready)"<%else%> value="<%=task.pr_link%>"<%end%>>
+              </div>
+            </p>
+          </div>
+
+        </div>
+
+        <div class="columns">
+          <div class="column ">
+            <!-- Start Update Status button -->
+
+            <input type="hidden" name="_method" value="PATCH">
+            <input class="button is-link is-medium" type="submit" value="Update status">
+            </form>
+            <!-- End update status button -->
+          </div>
+        </div>
+
+        <!-- Start give up on task button -->
+        <div class="column">
+          <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/give_up" method="post">
+
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="status" value="Open">
+
+            <div>
+              <div class="tag is-warning is-inverted">
+                <span>Is this task too challenging or not a good fit? </span> <input onclick="return confirm('Are you sure you wish to give up on ths task? Someone else will be able to claim it.');" class="has-danger-text" type="submit" value="Give up on this task &#9995;">
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <!-- End give up on task button -->
+      </div>
+    </section>
+
+
+    <footer class="modal-card-foot">
+
+
+
+    </footer>
+  </div>
+</div>
+<!-- End Status Modal -->

@@ -24,7 +24,7 @@
         <td>
           <%= render partial: '/shared/progress_bar', locals: {product: product} %>
         </td>
-        <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number) %></td>
+        <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-success is-bold' %></td>
         <td>
           <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
             contributors

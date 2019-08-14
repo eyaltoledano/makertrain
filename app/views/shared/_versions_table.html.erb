@@ -1,57 +1,57 @@
 <!-- Start versions table -->
 <% if @version.has_at_least_one_persisted_task? %>
-  <section class="container" id="version-tasks-table-section">
-    <br>
-    <h2 class="title">Tasks</h2>
-    <a data-target="#taskModal" aria-haspopup="true" class="button is-small modal-button">New task</a>
+  <section class="container mt-4" id="version-tasks-table-section">
+    <div class="card">
+      <div class="card-body">
+        <a data-target="#taskModal" aria-haspopup="true" class="button is-small modal-button is-pulled-right">New task</a>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Reward</th>
-          <th>Contributor</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @version.tasks.each do |task| %>
-         <% if task.persisted? %>
+        <table class="table">
+          <thead>
             <tr>
-              <th><%= task.id %></th>
-              <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.id %>"><%= task.name %></a>
-              </td>
-              <td><%= task.description %></td>
-              <td>
-                <strong class="has-text-success">
-                  $<%= sprintf "%.0f", task.reward %>
-                </strong>
-              </td>
-              <td>
-                <% if task.user.nil? %>
-                <a data-target="#claimModal-<%= task.id %>" aria-haspopup="true" class="title modal-button button is-success is-small">
-                  Claim
-                </a>
-
-                <!-- Start Claim modal -->
-                <%= render partial: '/shared/version_claim_task_modal', locals: { task: task } %>
-                <!-- End Claim Modal -->
-
-                <% else%>
-                <a href="/users/<%= task.user.username %>">
-                  <%= task.user.username %>
-                <% end %>
-                </a>
-              </td>
-              <td><%= task.status %></td>
+              <th>Task</th>
+              <th>Description</th>
+              <th>Reward</th>
+              <th>Contributor</th>
+              <th>Status</th>
             </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
+          </thead>
+
+          <tbody>
+            <% @version.tasks.each do |task| %>
+             <% if task.persisted? %>
+                <tr>
+                  <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.id %>"><%= task.name %></a>
+                  </td>
+                  <td><%= task.description %></td>
+                  <td>
+                    <strong class="has-text-success">
+                      $<%= sprintf "%.0f", task.reward %>
+                    </strong>
+                  </td>
+                  <td>
+                    <% if task.user.nil? %>
+                    <a data-target="#claimModal-<%= task.id %>" aria-haspopup="true" class="title modal-button button is-success is-small">
+                      Claim
+                    </a>
+
+                    <!-- Start Claim modal -->
+                    <%= render partial: '/shared/version_claim_task_modal', locals: { task: task } %>
+                    <!-- End Claim Modal -->
+
+                    <% else%>
+                    <a href="/users/<%= task.user.username %>">
+                      <%= task.user.username %>
+                    <% end %>
+                    </a>
+                  </td>
+                  <td><%= task.status %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </section>
 <% end %>
 <!-- End versions table -->
