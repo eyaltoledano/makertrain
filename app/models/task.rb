@@ -1,7 +1,8 @@
 class Task < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :product
   belongs_to :version
+
 
   def slug
   	self.name.gsub(" ", "-").downcase

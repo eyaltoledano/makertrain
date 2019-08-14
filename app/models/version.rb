@@ -17,6 +17,14 @@ class Version < ApplicationRecord
     self.tasks.where(status: "Open")
   end
 
+  def available_rewards
+    rewards = []
+    open_tasks.each do |task|
+      rewards << task.reward.to_i
+    end
+    rewards.inject(0){|sum,x| sum + x }
+  end
+
   def tasks_with_contributors
     contributed = []
     self.tasks.each do |task|
@@ -58,10 +66,10 @@ class Version < ApplicationRecord
     total_awarded = rewarded.inject(0){|sum,x| sum + x }
   end
 
-  def has_at_least_one_valid_task?
+  def has_at_least_one_persisted_task?
     # returns true if version has any valid tasks
     valid_tasks = []
-    self.tasks.each { |t| valid_tasks << t.id if t.valid? }
+    self.tasks.each { |t| valid_tasks << t.id if t.persisted? }
     !valid_tasks.empty?
   end
 

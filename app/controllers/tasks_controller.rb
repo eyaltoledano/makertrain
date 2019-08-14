@@ -9,7 +9,6 @@ class TasksController < ApplicationController
     @user = @product.user
     @version = Version.find_by_version_number(params[:version_version_number])
     @task = Task.find(params[:id])
-    binding.pry
   end
 
   def new

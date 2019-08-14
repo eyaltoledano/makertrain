@@ -1,6 +1,5 @@
 <!-- Start versions table -->
-<% if @version.has_at_least_one_valid_task? %>
-
+<% if @version.has_at_least_one_persisted_task? %>
   <section class="container" id="version-tasks-table-section">
     <br>
     <h2 class="title">Tasks</h2>
@@ -20,7 +19,7 @@
 
       <tbody>
         <% @version.tasks.each do |task| %>
-         <% if task.valid? %>
+         <% if task.persisted? %>
             <tr>
               <th><%= task.id %></th>
               <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.id %>"><%= task.name %></a>

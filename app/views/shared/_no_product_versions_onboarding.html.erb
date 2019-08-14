@@ -22,16 +22,22 @@
 
     <!-- Start empty state for product owner-->
 
-    <section class="container has-text-centered mt-4">
-      <div id="versions-empty-state" class="columns is-vcentered">
-        <div class="column">
-          <h1 class="title">
-            Congratulations on creating <%= @product.name %>, <%= @product.user.username %>! &#127881;
-          </h1>
-          <h2 class="subtitle">
-            It's time to start planning your first release.
-          </h2>
-          <a class="button is-info is-outlined is-medium" href="/products/<%= @product.slug %>/new_version">Start planning v1</a>
+    <section class="mt-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-end">
+              <span class="tag is-light"><%= @product.name %> doesn't have any versions yet</span>
+          </div>
+          <h4 class="label is-medium">Congratulations on creating <%= @product.name %>, <%= @product.user.username %>!</h4>
+          <h6 class="lead mb-2 text-muted">Create the first version of your new product</h6>
+          <p class="card-text">
+            Tasks belong to versions on Makertrain. This makes it easy to plan product milestones and encapsulate tasks that will get you to your next product goal. Create <%= @version.version_number %> to start adding tasks.
+          </p>
+
+          <div class="d-flex justify-content-end">
+            <a class="button is-link is-outlined is-medium" href="/products/<%= @product.slug %>/new_version">Start planning v1</a>
+          </div>
+
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-<% if !@version.has_at_least_one_valid_task? %>
+<% if !@version.has_at_least_one_persisted_task? %>
 
   <section class="mt-4">
     <div class="card">
@@ -6,14 +6,14 @@
         <div class="d-flex justify-content-end">
             <span class="tag is-light"><%= @product.name %> <%= @version.version_number%> doesn't have any tasks yet</span>
         </div>
-        <h4 class="label is-medium">Congratulations on starting <%= @version.version_number%> of <%= @product.name %>!</h4>
+        <h4 class="label is-medium"><span class="tag is-link is-medium"><%= @version.version_number%></span> Congratulations on starting <%= @version.version_number%> of <%= @product.name %>!</h4>
         <h6 class="lead mb-2 text-muted">Enlist the help of other makers to complete and launch your product</h6>
         <p class="card-text">
           Tasks are central to Makertrain. Makers across the community are searching for tasks to complete to in exchange for cash and equity rewards. Create the first task that you need completed to get <%= @version.version_number %> off the ground.
         </p>
 
         <div class="d-flex justify-content-end">
-          <a data-target="#taskModal" aria-haspopup="true" id="open-modal" class="button is-link is-outlined modal-button">Create the first task</a>
+          <a data-target="#taskModal" aria-haspopup="true" id="open-modal" class="button is-link is-outlined modal-button">Create a task for <%= @version.version_number%></a>
         </div>
 
       </div>
