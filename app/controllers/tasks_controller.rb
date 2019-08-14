@@ -63,6 +63,17 @@ class TasksController < ApplicationController
     end
   end
 
+  def give_up
+    @task = Task.find(claim_params[:task_id])
+    @version = @task.version
+    @product = @version.product
+    @task.user = nil
+    @task.status = "Open"
+    @task.save
+    flash[:notice] = "You gave up on Task ##{@task.id}. On to the next!"
+    redirect_to claimed_tasks_path
+  end
+
   def edit
     set_current_user
     redirect_if_not_logged_in
@@ -88,4 +99,5 @@ class TasksController < ApplicationController
   def claim_params
     params.permit(:task_id)
   end
+
 end
