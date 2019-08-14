@@ -4,6 +4,8 @@ class VersionsController < ApplicationController
     @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
     @version = Version.find_by_version_number(params[:version_number])
+    @task = @version.tasks.build(reward: 0)
+    @task.product = @product
   end
 
   def new

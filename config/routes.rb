@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   get '/claimed_tasks' => 'users#claimed'
   get '/portfolio' => 'users#owned_products'
 
-
   resources :products, param: :slug do
     get ':slug/new_version' => 'versions#new'
     resources :versions, param: :version_number do
       resources :tasks
+      post 'new_task' => 'tasks#create'
     end
   end
 
