@@ -74,6 +74,40 @@ class TasksController < ApplicationController
     redirect_to claimed_tasks_path
   end
 
+  def update_status
+    @task = Task.find(claim_params[:task_id])
+    if params[:status] == "Select a status"
+      flash[:notice] = "You need to select a new status for #{@task.name}. Please try again."
+      redirect_to claimed_tasks_path
+    elsif params[:status] == "Ready for Review" && !params[:pr_link].include?("github.com")
+      flash[:notice] = "Please make sure to submit your task with a valid Pull Request URL from GitHub. Your PR should be submitted to the project's repository."
+      redirect_to claimed_tasks_path
+    end
+
+    if params[:status] == "Ready for Review"
+      @task.status = "PR Submitted"
+    else
+      @task.status = params[:status]
+    end
+
+    @task.pr_link = params[:pr_link]
+
+    if @task.save
+      flash[:notice] = "The status for #{@task.name} was updated to #{@task.status}."
+
+      @task_user = @task.user
+
+      if @task.status == "Complete"
+        @task_user.balance = @task_user.balance + @task.reward
+        @task_user.save
+      end
+      redirect_to claimed_tasks_path
+    else
+      flash[:notice] = "Something went wrong trying to update the status for #{@task}. Please verify your submission and try again."
+      redirect_to claimed_tasks_path
+    end
+  end
+
   def edit
     set_current_user
     redirect_if_not_logged_in
