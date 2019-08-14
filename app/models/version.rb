@@ -58,5 +58,12 @@ class Version < ApplicationRecord
     total_awarded = rewarded.inject(0){|sum,x| sum + x }
   end
 
+  def has_at_least_one_valid_task?
+    # returns true if version has any valid tasks
+    valid_tasks = []
+    self.tasks.each { |t| valid_tasks << t.id if t.valid? }
+    !valid_tasks.empty?
+  end
+
 
 end

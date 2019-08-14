@@ -1,0 +1,83 @@
+<section class="hero is-dark is-bold" id="dashboard_hero">
+
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-two-thirds">
+          <h1 class="title">
+            <%= @product.name %>
+          </h1>
+
+          <div class="content is-medium">
+            <p><%= @product.description %></p>
+          </div>
+
+          <div id="product-founding-info">
+            <div class="field is-grouped is-grouped-multiline is-centered">
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-dark">founded by</span>
+                  <span class="tag is-light">
+                    <a href="/users/<%= @product.user.id %>">
+                      <%= @product.user.display_name %>
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-dark">founded on</span>
+                  <span class="tag is-light">
+                    <%= @product.created_at.strftime("%B %-d, %Y") %>
+                  </span>
+                </div>
+              </div>
+              <div class="control">
+                <a href="<%= "http://#{@product.git_repo}" %>" target="_blank">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="column">
+          <div id="product-info">
+            <br>
+            <span class="level is-centered">
+              <div class="level-item has-text-centered">
+                <div>
+                  <p class="heading">Current Version</p>
+                  <% if @product.versions.empty? %>
+                    <p class="title">N/A</p>
+                  <% else %>
+                    <p class="title">
+                      <%= link_to "#{@product.name} #{@version.version_number}", product_version_path(@product.slug, @version.version_number), class: 'button is-link is-large', id: 'product-current-version' %>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+              <div class="level-item has-text-centered">
+                <div>
+                  <p class="heading">Open Tasks</p>
+                  <p class="title">
+                    <% if @product.versions.empty? %>
+                    <a class="tag is-danger is-large">
+                      0
+                    </a>
+                    <% else %>
+                    <a class="tag is-success is-large" href="#">
+                      <%= @version.open_tasks.count %>
+                    </a>
+                    <% end %>
+
+                  </p>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

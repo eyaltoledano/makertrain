@@ -1,0 +1,88 @@
+<!-- Start versions table -->
+<% if @version.has_at_least_one_valid_task? %>
+
+  <section class="container" id="version-tasks-table-section">
+    <br>
+    <h2 class="title">Tasks</h2>
+    <a data-target="#taskModal" aria-haspopup="true" class="button is-small modal-button">New task</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Reward</th>
+          <th>Contributor</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @version.tasks.each do |task| %>
+         <% if task.valid? %>
+            <tr>
+              <th><%= task.id %></th>
+              <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.id %>"><%= task.name %></a>
+              </td>
+              <td><%= task.description %></td>
+              <td>
+                <strong class="has-text-success">
+                  $<%= sprintf "%.0f", task.reward %>
+                </strong>
+              </td>
+              <td>
+                <% if task.user.nil? %>
+                <a data-target="#claimModal-<%= task.id %>" aria-haspopup="true" class="title modal-button button is-success is-small">
+                  Claim
+                </a>
+
+                <!-- Start Claim modal -->
+                <div class="modal" id="claimModal-<%= task.id %>">
+                  <div class="modal-background"></div>
+                  <div class="modal-card">
+                    <header class="modal-card-head">
+                      <p class="modal-card-title">
+                        <strong class="has-text-link"><%=task.name%></strong>
+                      </p>
+                      <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                      <div class="container ">
+                        <div class="column">
+                          <p class="headline">
+                            <strong>Do you want to claim this task?</strong>
+
+                            <span class="is-small">To earn this task's $<%= task.reward%> reward, you'll have to submit a Github pull request and provide that link. If accepted by the owner of the product, your reward will be added to your balance.</span>
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                    <footer class="modal-card-foot">
+
+                      <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/claim" method="post">
+                        <input type="hidden" name="_method" value="PATCH">
+
+                        <input class="button is-link" type="submit" value="Claim this task">
+                        </form>
+
+                    </footer>
+                  </div>
+                </div>
+                <!-- End Claim Modal -->
+
+                <% else%>
+                <a href="/users/<%= task.user.username %>">
+                  <%= task.user.username %>
+                <% end %>
+                </a>
+              </td>
+              <td><%= task.status %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+<% end %>
+<!-- End versions table -->

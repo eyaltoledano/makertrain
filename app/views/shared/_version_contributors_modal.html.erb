@@ -1,0 +1,62 @@
+<!-- Start contributors modal -->
+
+<div class="modal" id="contributorsModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Users contributing to <%= @product.name%> <%= @version.version_number %></p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container has-text-centered">
+        <div class="columns">
+          <% if @version.tasks.empty? %>
+          <div class="column">
+            <p>This project can't have contributors if it doesn't have any tasks</p>
+          </div>
+          <% else %>
+            <% if !@version.tasks.empty? && @version.progress == 0%>
+            <div class="column has-text-centered">
+              <p>
+                <span class="tag is-link is-large">
+                  There are currently <%= @version.open_tasks.count %> open tasks for <%= @product.name %> <%= @version.version_number %>.
+                </span>
+                <br>
+                Close this window and claim a task to start earning. &#128176;
+              </p>
+            </div>
+
+              <% else %>
+                <% @version.unique_contributors.each do |contributor| %>
+                <div class="column is-one-third">
+                  <div class="card">
+                    <div class="card-content">
+                      <p class="subtitle">
+                        <a href="/users/<%= contributor.slug %>"><%= contributor.username %></a>
+                      </p>
+                      <p class="small">
+                        Maker since <%= contributor.created_at.strftime("%B  %Y") %>
+                      </p>
+                    </div>
+                    <footer class="card-footer">
+                      <p class="card-footer-item">
+                        <span>
+                          <i class="fas fa-user-astronaut"></i>
+                          <a href="/users/<%= contributor.slug%>">Visit Profile</a>
+                        </span>
+                      </p>
+                    </footer>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+    </footer>
+  </div>
+</div>
+
+<!-- End Contributors Modal -->

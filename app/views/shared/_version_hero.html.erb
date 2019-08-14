@@ -1,0 +1,57 @@
+
+<section class="hero is-dark is-bold" id="dashboard_hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-half">
+          <h1 class="title">
+            <a class="has-text-white" href="/products/<%= @product.slug%>">
+              <%= "#{@product.name}"%>
+            </a> <% if @version %><span class="tag is-link is-medium is-bold "><%="#{@version.version_number}" %></span><% end %>
+          </h1>
+          <p class="subtitle">
+            <%= @version.description if @version %>
+          </p>
+        </div>
+        <div class="column">
+          <span class="level is-centered">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Available Rewards</p>
+                <p class="title. has-text-success">$<%= sprintf "%.2f", 0 %></p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Version Progress</p>
+                <p class="title"><%= @version.progress.to_i if @version%>%</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Open Tasks</p>
+                <p class="title">
+                  <% if @version.open_tasks.count > 0 %>
+                    <a class="tag is-success is-large"><%= @version.open_tasks.count %></a>
+                  <% else %>
+                    <a class="tag is-danger is-large"><%= @version.open_tasks.count %></a>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Contributors</p>
+
+                <a data-target="#contributorsModal" aria-haspopup="true" class="title modal-button tag is-link is-large">
+                  <%= @version.unique_contributors.count if @version %>
+                </a>
+                </a>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

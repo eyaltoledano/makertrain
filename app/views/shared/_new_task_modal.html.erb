@@ -1,0 +1,77 @@
+<!-- Start new task modal -->
+
+<div class="modal" id="taskModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Create a new task for <%= @product.name%> <%= @version.version_number %></p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container has-text-centered">
+
+        <%= form_tag product_version_tasks_path(@product.slug, @version.version_number) do %>
+
+        <div class="field">
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-pen"></i>
+            </span>
+            <%= text_field_tag :name, nil, class: 'input', placeholder: 'Give your task a descriptive name' %>
+          </div>
+        </div>
+
+        <div class="field medium">
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-tasks"></i>
+            </span>
+            <%= text_area_tag :description, nil, class: 'input textarea', placeholder: 'Describe the new task in as much detail as you can' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-dollar-sign"></i>
+            </span>
+            <%= number_field_tag :reward, nil, class: 'input', placeholder: 'What are you willing to pay to get this task completed? (USD)' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-code-branch"></i>
+            </span>
+            <input class="input" type="text" value="<%=@version.version_number%>" disabled>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-rocket"></i>
+            </span>
+            <input class="input" type="text" value="<%=@product.name%>" disabled>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control ">
+            <p><span class="icon is-small">
+              <i class="fas fa-question-circle"></i>
+            </span> Have questions? <a href="mailto:<%= @product.user.email%>">Get in touch with <%= @product.user.username %></a></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <footer class="modal-card-foot pt-4">
+      <%= submit_tag "Create task", class: 'button is-success is-outlined has-text-centered is-pulled-right', id: 'submit-signup' %>
+    </footer>
+    <% end %>
+  </div>
+</div>
+
+<!-- End new task modal -->

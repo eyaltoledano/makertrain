@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
         @version.product = @product
         if @version.save
           flash[:notice] = "#{@product.name} #{@version.version_number} was successfully created!"
-          redirect_to product_version_path(@product, @version)
+          redirect_to product_version_path(@product.slug, @version.version_number)
         else
           flash[:notice] = "Something went wrong"
           render :new
