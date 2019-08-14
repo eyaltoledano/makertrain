@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :greeting_helper
   helper_method :support_nil_user_balance
 
+  @@TASK_STATUSES = ["New", "Researching", "Writing specs", "In progress", "Ready for Review", "Reviewing", "Accepted", "Rejected", "Completed"]
+
   def current_user
     User.find(session[:user_id])
   end
@@ -43,4 +45,10 @@ class ApplicationController < ActionController::Base
     @user.balance.nil? ? @user.balance = 0 : @user.balance
   end
 
+end
+
+class Numeric
+  def percent_of(n)
+    self.to_f / n.to_f * 100.0
+  end
 end

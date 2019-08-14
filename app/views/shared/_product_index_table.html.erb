@@ -2,13 +2,11 @@
   <table class="table">
     <thead class="head-light">
       <tr>
-        <th>Name</th>
-        <th>Founder</th>
-        <th>Current Version</th>
+        <th>Product</th>
+        <th>Maker</th>
+        <th></th>
         <th><%= @latest_version_number %> Contributors</th>
         <th>Available Rewards</th>
-        <th><%= @latest_version_number %> Payouts</th>
-        <th>Actions</th>
       </tr>
     </thead>
 
@@ -19,18 +17,19 @@
       <tr>
         <td>
           <%= link_to product.name, product_path(product.slug) %>
+          <%= link_to "#{product.latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-link is-small' %>
           <span class="tag is-small"><%= product.status %></span>
         </td>
         <td><%= link_to product.user.username, user_path(product.user) %></td>
-        <td><%= link_to "#{product.pretty_latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-link is-small' %></td>
+        <td>
+          <%= render partial: '/shared/progress_bar', locals: {product: product} %>
+        </td>
         <td>
           <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
             <%= product.latest_version_contributor_count %> contributors
           </a>
         </td>
         <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number) %></td>
-        <td><span class="tag is-small">coming soon</span></td>
-        <td>soon</td>
       </tr>
 
 
