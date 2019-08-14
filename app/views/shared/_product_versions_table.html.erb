@@ -1,40 +1,40 @@
 <% if !@product.versions.empty? %>
   <!-- Start versions table -->
 
-  <section class="container" id="product-versions-table-section">
-    <br>
-    <h2 class="title"><%= @product.name %> Versions</h2>
-    <%= link_to "New version", new_product_version_path(@product.slug), class: 'button is-small' %>
+  <section class="container card" id="product-versions-table-section">
+    <div class="card-body">
+      <%= link_to "New version", new_product_version_path(@product.slug), class: 'button is-small is-pulled-right' %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Version Number</th>
+            <th>Description</th>
+            <th>Progress</th>
+            <th>Release Date</th>
+            <th>Created</th>
+            <th>Last update</th>
+          </tr>
+        </thead>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Version Number</th>
-          <th>Description</th>
-          <th>Progress</th>
-          <th>Release Date</th>
-          <th>Created</th>
-          <th>Last update</th>
-        </tr>
-      </thead>
+        <tbody>
+          <% @product.versions.each do |version| %>
+          <tr>
+            <th><%= version.id %></th>
+            <td>
+              <%= link_to "#{@product.name} #{@version.version_number}", product_version_path(@product.slug, @version.version_number), class: 'tag is-link' %>
+            </td>
+            <td><%= version.description %></td>
+            <td><%= version.progress %>%</td>
+            <td><%= version.release_date %></td>
+            <td><%= version.created_at.strftime("%B %-d, %Y") %></td>
+            <td><%= version.updated_at.strftime("%B %-d, %Y, %H:%M") %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-      <tbody>
-        <% @product.versions.each do |version| %>
-        <tr>
-          <th><%= version.id %></th>
-          <td>
-            <%= link_to "#{@product.name} #{@version.version_number}", product_version_path(@product.slug, @version.version_number), class: 'tag is-link' %>
-          </td>
-          <td><%= version.description %></td>
-          <td><%= version.progress %>%</td>
-          <td><%= version.release_date %></td>
-          <td><%= version.created_at.strftime("%B %-d, %Y") %></td>
-          <td><%= version.updated_at.strftime("%B %-d, %Y, %H:%M") %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
   </section>
 
   <!-- End versions table -->

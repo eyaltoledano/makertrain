@@ -6,7 +6,7 @@
       <li class="is-complete"><span>Founded <%= time_month_date_year(@product.created_at) %></span></li>
       <% @versions.each do |version| %>
         <li class="<% if version.is_latest_version? %>is-active<%else%>is-complete<%end%>">
-          <span>Started <%= version.version_number %> <%= time_month_date_year(@version.created_at) %></span>
+          <span>Started <%= link_to version.version_number, product_version_path(@product, version), class: 'tag is-link' %> <%= time_month_date_year(@version.created_at) %></span>
         </li>
 
         <% if version.is_latest_version? %>
