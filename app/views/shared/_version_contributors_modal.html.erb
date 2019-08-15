@@ -12,7 +12,7 @@
         <div class="columns">
           <% if version.tasks.empty? %>
           <div class="column">
-            <p>This project can't have contributors if it doesn't have any tasks</p>
+            <p>This version can't have contributors if it doesn't have any tasks</p>
           </div>
           <% elsif product.latest_version_contributor_count == 0%>
           <div class="column">
@@ -32,7 +32,7 @@
             </div>
 
               <% else %>
-              
+
                 <% version.unique_contributors.each do |contributor| %>
                   <div class="column is-one-third">
                     <div class="card">
