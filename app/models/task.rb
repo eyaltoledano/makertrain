@@ -5,7 +5,7 @@ class Task < ApplicationRecord
 
 
   def slug
-  	self.name.gsub(" ", "-").downcase
+  	self.name.gsub(" ", "-").downcase.gsub(".", "-")
   end
 
   def self.find_by_slug(slug)
