@@ -2,9 +2,22 @@
 <div class="progress">
 
 <% progress_hash(product.latest_version).each do |status,percent| %>
-    <div class="progress-bar <%= progress_bar_class(status) %>" role="progressbar" style="width: <%=percent*100%>%"><%= status.to_s.capitalize %></div>
+    <div
+    class="progress-bar <%= progress_bar_class(status) %>" style="height: 1.5rem; width: <%="#{percent}%"%>"
+    data-toggle="tooltip"
+    data-placement="top"
+    data-container="body"
+    title="<%= progress_bar_popover_content(product.latest_version, status) %>">
+      <%= "#{status.to_s.capitalize.humanize.titleize} (#{percent.to_i}%)" %>
+    </div>
 <% end %>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
 <!--
 <div class="progress">
