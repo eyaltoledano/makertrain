@@ -1,3 +1,7 @@
-<%= render '/shared/product_index_table' %>
-
+<% if @products.empty? %>
+  <p>There are no products yet.</p>
+  <p><%= link_to "Create a product", new_product_path, class: 'btn btn-primary' %></p>
+<% else %>
+  <%= render '/shared/product_index_table' %>
+<% end %>
 <%= render '/shared/modal_open_and_close' %>
