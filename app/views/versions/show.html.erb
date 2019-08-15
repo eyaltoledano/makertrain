@@ -2,6 +2,14 @@
 
 <%= render '/shared/no_version_tasks_onboarding' %>
 
+<div class="card mt-4">
+  <div class="card-body">
+    <p class="heading">Version Progress</p>
+    <%= render partial: '/shared/progress_bar', locals: {product: @version.product} %>
+  </div>
+</div>
+
+
 <%= render '/shared/versions_table' %>
 
 <%= render '/shared/new_task_modal' %>
