@@ -2,8 +2,13 @@ class ProductsController < ApplicationController
   def index
     set_current_user
     @products = Product.all
-    @latest_version_number = @products.last.latest_version_number
-    @pretty_latest_version_number = @products.last.pretty_latest_version_number
+    if @products.empty?
+      @latest_version_number = nil
+      @pretty_latest_version_number = nil
+    else
+      @latest_version_number = @products.last.latest_version_number
+      @pretty_latest_version_number = @products.last.pretty_latest_version_number
+    end
   end
 
   def new
