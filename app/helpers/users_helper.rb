@@ -24,7 +24,7 @@ module UsersHelper
     if @greeting[:text] == "Happy moonlighting"
       "hero is-dark is-bold"
     else
-      "hero is-bold"
+      "hero is-light "
     end
   end
 

@@ -1,4 +1,4 @@
-<section class="hero is-bold" id="dashboard_hero">
+<section class="<%=dashboard_hero_class_name%>" id="dashboard_hero">
   <div class="hero-body">
     <div class="container">
       <div class="columns">
@@ -6,9 +6,10 @@
         <div class="column">
           <nav class="level">
 
-            <div class="column is-4">
+            <div class="column is-half">
               <h1 class="title lead">
-                Task Review
+                <i class="em <%=@greeting[:emoji]%>"></i>
+                There are some tasks to review
               </h1>
               <h2 class="subtitle">
                   <% if @user.has_items_for_review? %>

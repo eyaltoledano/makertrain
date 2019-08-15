@@ -9,11 +9,11 @@
           </h1>
           <h1 class="subtitle">
               <% if !@user.has_no_claimed_tasks? %>
-                <a class="badge badge-primary mt-4" href="/claimed_tasks"><%= tasks_to_work_on_text %></a>
+                <a class="badge badge-primary has-text-white mt-4" href="/claimed_tasks"><%= tasks_to_work_on_text %></a>
               <% end %>
 
               <% if @user.has_items_for_review? %>
-                <a class="badge badge-primary mt-4" href="/review_tasks"><%= open_tasks_for_review_text %></a>
+                <a class="badge badge-primary has-text-white mt-4" href="/review_tasks"><%= open_tasks_for_review_text %></a>
               <% end %>
           </h1>
         </div>

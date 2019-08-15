@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def dashboard
     set_current_user
     redirect_if_not_logged_in
-    @greeting = greeting_helper
+    greeting_helper
     @owned_products = @user.products.count
     @user_owned_products = @user.products
     @status_list = ["Researching", "Writing specs", "In progress", "Ready for Review"]
@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     redirect_if_not_logged_in
     set_current_user
     status_lists
+    greeting_helper
     @user_owned_products = @user.products
     @owned_products = @user.products.count
-
   end
 
   def claimed
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     set_current_user
     support_nil_user_balance
     status_lists
+    greeting_helper
   end
 
   def owned_products
