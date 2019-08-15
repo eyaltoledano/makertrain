@@ -13,14 +13,17 @@ class UsersController < ApplicationController
   def review
     redirect_if_not_logged_in
     set_current_user
+    status_lists
+    @user_owned_products = @user.products
+    @owned_products = @user.products.count
+
   end
 
   def claimed
     redirect_if_not_logged_in
     set_current_user
     support_nil_user_balance
-    @status_list = ["Researching", "Writing specs", "In progress", "Ready for Review"]
-    @review_status_list = ["Reviewing", "Accepted", "Rejected", "Completed"]
+    status_lists
   end
 
   def owned_products

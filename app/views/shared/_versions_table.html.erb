@@ -22,7 +22,7 @@
             <% @version.tasks_claimable_first.each do |task| %>
              <% if task.persisted? %>
                 <tr>
-                  <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.id %>"><%= task.name %></a>
+                  <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.slug %>"><%= task.name %></a>
                   </td>
                   <td><%= task.description %></td>
                   <td>
@@ -32,9 +32,9 @@
                   </td>
                   <td>
                     <% if task.user.nil? %>
-                    <a data-target="#claimModal-<%= task.id %>" aria-haspopup="true" class="title modal-button button is-success is-small">
+                    <span data-target="#claimModal-<%= task.id %>" aria-haspopup="true" class="title modal-button button is-success is-small">
                       Claim
-                    </a>
+                    </span>
 
                     <!-- Start Claim modal -->
                     <%= render partial: '/shared/version_claim_task_modal', locals: { task: task } %>

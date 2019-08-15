@@ -86,9 +86,20 @@ class User < ApplicationRecord
     rewards.inject(0, :+)
   end
 
+  def versions
+    versions = []
+    self.products.each do |product|
+      product.versions.each do |version|
+        versions << version
+      end
+    end
+    versions
+  end
+
   def tasks_for_review
     items_to_review = []
     self.versions.each do |version|
+
       version.tasks.each do |task|
         items_to_review << task if task.status == "Ready for Review" || task.status == "Reviewing" || task.status == "PR Submitted" || task.status == "Accepted"
       end

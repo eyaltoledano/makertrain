@@ -1,5 +1,5 @@
 <section class="container" id="dashboard-review-section">
-  
+
   <% if @user.has_items_for_review? %>
 
   <table class="table is-size-7">
@@ -24,10 +24,10 @@
         <% product.versions.each do |version| %>
 
             <% version.tasks.each do |task| %>
-
+            <%= render partial: '/shared/review_tasks_modal', locals: { task: task } %>
               <% if task.status == "Ready for Review" || task.status == "Reviewing" || task.status == "PR Submitted" ||
             task.status == "Accepted" %>
-                <%= erb :'/shared/_dash_review_task_modal', locals: {task: task} %>
+
                 <tr>
                   <th><%= task.id %></th>
                   <td><a href="/products/<%= task.product.slug %>">
@@ -44,7 +44,7 @@
                     </strong>
                   </td>
                   <td>
-                    <a href="/users/<%=task.user.slug%>"><%=task.user.username%></a>
+                    <a href="/users/<%=task.user.slug%>"><%=task.user.name%></a>
                   </td>
                   <td>
                     <%= task.status %>

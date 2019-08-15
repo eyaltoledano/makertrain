@@ -24,7 +24,7 @@
             <td>
               <%= link_to task.version.version_number, product_version_path(task.product.slug, task.version.version_number), class: 'tag' %>
             </td>
-            <td><strong><%= link_to task.name, product_version_task_path(task.product.slug, task.version.version_number, task.id) %></strong></td>
+            <td><strong><%= link_to task.name, product_version_task_path(task.product.slug, task.version.version_number, task.slug) %></strong></td>
             <td width="40%"><%= task.description %></td>
             <td>
               <strong class="has-text-success">

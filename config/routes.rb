@@ -17,18 +17,19 @@ Rails.application.routes.draw do
   post '/claim' => 'tasks#claim'
   post '/give_up' => 'tasks#give_up'
   post '/update_status' => 'tasks#update_status'
+  post '/review_task' => 'tasks#review_task'
 
   resources :versions
-  
+
   resources :products, param: :slug do
     get ':slug/new_version' => 'versions#new'
     resources :versions, param: :version_number do
-      resources :tasks
+      resources :tasks, param: :slug
       post 'new_task' => 'tasks#create'
     end
   end
 
-
+  get '/products/:product_slug/versions/:version_number/tasks/:task_slug' => 'tasks#show'
 
 
 end

@@ -8,7 +8,13 @@ class TasksController < ApplicationController
     @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
     @version = Version.find_by_version_number(params[:version_version_number])
-    @task = Task.find(params[:id])
+    if params[:id].to_i == 0 # if it's 0, it's a string of words (a task_slug)
+      @task = Task.find_by_slug(params[:id])
+      # binding.pry
+    else
+      @task = Task.find(params[:id])
+    end
+
   end
 
   def new
@@ -108,6 +114,31 @@ class TasksController < ApplicationController
     end
   end
 
+  def review_task
+    @task = Task.find(task_review_params[:task_id])
+
+    if task_review_params[:status] == "Select a new status"
+      flash[:notice] = "You need to select a new status for #{@task.name}. Please try again."
+      redirect_to review_tasks_path
+    end
+
+    @task.status = task_review_params[:status]
+
+    if @task.status == "Completed"
+      rewardee = @task.user
+      rewardee.balance += @task.reward.to_f
+      rewardee.save
+    end
+
+    if @task.save
+      flash[:notice] = "The status for #{@task.name} was updated to '#{@task.status}'."
+      redirect_to review_tasks_path
+    else
+      flash[:notice] = "Something went wrong trying to update the status for #{@task}."
+      redirect_to review_tasks_path
+    end
+  end
+
   def edit
     set_current_user
     redirect_if_not_logged_in
@@ -134,4 +165,7 @@ class TasksController < ApplicationController
     params.permit(:task_id)
   end
 
+  def task_review_params
+    params.permit(:task_id, :status)
+  end
 end

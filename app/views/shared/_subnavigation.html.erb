@@ -12,7 +12,7 @@
       </a>
     </li>
 
-    <% if @user.items_for_review_count > 0 %>
+    <% if @user.has_items_for_review? %>
     <li class="<%= subnavigation_class_name("review") %>">
       <a href="/review_tasks">Tasks to Review
         <span class="tag">

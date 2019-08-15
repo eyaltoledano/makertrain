@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :redirect_if_not_logged_in
   helper_method :greeting_helper
   helper_method :support_nil_user_balance
+  helper_method :status_lists
 
   @@TASK_STATUSES = ["New", "Researching", "Writing specs", "In progress", "Ready for Review", "Reviewing", "Accepted", "Rejected", "Completed"]
 
@@ -45,6 +46,10 @@ class ApplicationController < ActionController::Base
     @user.balance.nil? ? @user.balance = 0 : @user.balance
   end
 
+  def status_lists
+    @status_list = ["Researching", "Writing specs", "In progress", "Ready for Review"]
+    @review_status_list = ["Reviewing", "Accepted", "Rejected", "Completed"]
+  end
 end
 
 class Numeric
