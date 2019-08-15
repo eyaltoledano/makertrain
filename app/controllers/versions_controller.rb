@@ -2,7 +2,7 @@ class VersionsController < ApplicationController
   def show
     set_current_user
     @product = Product.find_by_slug(params[:product_slug])
-    @version = Version.find_by_version_number(params[:version_number])
+    @version = @product.versions.find_by_version_number(params[:version_number])
     @task = @version.tasks.build(reward: 0)
     @task.product = @product
   end
