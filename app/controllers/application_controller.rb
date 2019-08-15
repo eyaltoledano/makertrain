@@ -50,6 +50,13 @@ class ApplicationController < ActionController::Base
     @status_list = ["Researching", "Writing specs", "In progress", "Ready for Review"]
     @review_status_list = ["Reviewing", "Accepted", "Rejected", "Completed"]
   end
+
+  def remind_to_add_a_username_if_nil
+    if @user.name.empty?
+      flash[:notice] = "You don't currently have a display name. You should set one before continuing."
+      redirect_to edit_user_path(@user)
+    end
+  end
 end
 
 class Numeric
