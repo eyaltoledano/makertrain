@@ -1,5 +1,6 @@
+@import "bootstrap";
+@import "bootstrap/mixins";
 
- @import "bootstrap";
 
  #id_indicator {
    margin-right: 170%;
@@ -75,6 +76,58 @@ footer {
   margin-bottom: 2rem;
 }
 
+// Start Fix bootstrap stacked progress bar
+
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Opera 12
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down
+}
+
+@mixin gradient-striped($color: rgba(255,255,255,.15), $angle: 45deg) {
+  background-image: -webkit-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+  background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+}
+
+.progress-bar { float: left; }
+
+// Danger (red)
+.progress-bar-danger, .progress-bar-danger {
+  @include gradient-vertical(#ee5f5b, #c43c35);
+}
+.progress-bar-danger .progress-bar-striped {
+  @include gradient-striped(#ee5f5b);
+}
+
+// Success (green)
+.progress-bar-success {
+  @include gradient-vertical(#62c462, #57a957);
+}
+.progress-bar-success.progress-striped .bar, .progress-striped .bar-success {
+  @include gradient-striped(#62c462);
+}
+
+// Info (teal)
+.progress-bar-info {
+  @include gradient-vertical(#5bc0de, #339bb9);
+}
+.progress-bar-info .progress-striped, .progress-bar-striped {
+  @include gradient-striped(#5bc0de);
+}
+
+// Warning (orange)
+.progress-bar-warning, .progress-bar-warning {
+  @include gradient-vertical(lighten($orange, 15%), $orange);
+}
+
+.progress-bar-warning .progress-bar-striped {
+  @include gradient-striped(lighten($orange, 15%));
+}
+
+// End Fix bootstrap stacked progress bar
 
 .progress-bar1 {
   display: flex;
@@ -196,4 +249,39 @@ footer {
   left: calc(50% - 4px);
   bottom: -20px;
   background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%208%22%3E%3Cpath%20fill%3D%22%23ed1c24%22%20d%3D%22M4%200l4%208H0z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+.stat-val {
+  font-size: 3em;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.stat-key {
+  font-size: 1.4em;
+  font-weight: 200
+}
+
+.section.profile-heading .column.is-2-tablet.has-text-centered + .has-text-centered {
+  border-left: 1px dotted rgba(0, 0, 0, .2);
+}
+
+.container.profile {
+  margin-top: 1%;
+}
+
+.control.is-pulled-left span.select {
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.modal-card .content h1 {
+  padding: 40px 10px 10px;
+  border-bottom: 1px solid #dadada
+}
+
+.container.profile .profile-options .tabs ul li.link a {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #F1F1F1;
 }

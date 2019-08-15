@@ -24,10 +24,10 @@
         <% product.versions.each do |version| %>
 
             <% version.tasks.each do |task| %>
-            <%= render partial: '/shared/review_tasks_modal', locals: { task: task } %>
+
               <% if task.status == "Ready for Review" || task.status == "Reviewing" || task.status == "PR Submitted" ||
             task.status == "Accepted" %>
-
+              <%= render partial: '/shared/review_tasks_modal', locals: { task: task } %>
                 <tr>
                   <th><%= task.id %></th>
                   <td><a href="/products/<%= task.product.slug %>">

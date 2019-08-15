@@ -1,2 +1,125 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<span class="tag is-light d-flex justify-content-center">User profile under construction</span>
+<div class='columns'>
+  <div class='container profile'>
+    <div class='section profile-heading'>
+      <div class='columns is-mobile is-multiline'>
+        <div class='column is-2'>
+          <span class='header-icon user-profile-image'>
+            <%= image_tag(@profile_user.avatar_url, class: "rounded") %>
+          </span>
+        </div>
+        <div class='column is-4-tablet is-10-mobile name'>
+          <p>
+            <span class='title is-bold'><%= @profile_user.name %></span>
+            <br>
+            <% if current_user == @profile_user %>
+            <a class='button is-primary is-outlined' href='/users/<%=@profile_user.id%>/edit' id='edit-preferences' style='margin: 5px 0'>
+              Edit Preferences
+            </a>
+            <br>
+            <% end %>
+          </p>
+          <p class='tagline'>
+            The users profile bio would go here, of course. It could be two lines or more or whatever. We should probably limit the amount of characters to ~500 at most though.
+          </p>
+        </div>
+        <div class='column is-3-tablet is-5-mobile has-text-centered'>
+          <p class='stat-val'>30</p>
+          <p class='stat-key'>contributions</p>
+        </div>
+        <div class='column is-3-tablet is-5-mobile has-text-centered'>
+          <p class='stat-val'>$5,800</p>
+          <p class='stat-key'>earned this month</p>
+        </div>
+
+      </div>
+    </div>
+    <div class='profile-options is-fullwidth'>
+      <div class='tabs is-fullwidth is-medium'>
+        <ul>
+          <li class='link'>
+            <a>
+              <span class='icon'>
+                <i class='fa fa-list'></i>
+              </span>
+              <span>Made</span>
+            </a>
+          </li>
+          <li class='link is-active'>
+            <a>
+              <span class='icon'>
+                <i class='fa fa-thumbs-up'></i>
+              </span>
+              <span>Contributed</span>
+            </a>
+          </li>
+          <li class='link'>
+            <a>
+              <span class='icon'>
+                <i class='fa fa-search'></i>
+              </span>
+              <span>History</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class='columns is-mobile'>
+      <div class='column is-3-tablet is-6-mobile'>
+        <div class='card'>
+          <div class='card-image'>
+            <figure class='image is-4by3'>
+              <img alt='' src='http://placehold.it/300x225'>
+            </figure>
+          </div>
+          <div class='card-content'>
+            <div class='content'>
+              <span class='tag is-dark subtitle'>#1</span>
+              <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
+            </div>
+          </div>
+          <footer class='card-footer'>
+            <a class='card-footer-item'>Compare</a>
+            <a class='card-footer-item'>Share</a>
+            <a class='card-footer-item'>Delete</a>
+          </footer>
+        </div>
+        <br>
+      </div>
+      <div class='column is-3-tablet is-6-mobile'>
+        <div class='card'>
+          <div class='card-image'>
+            <figure class='image is-4by3'>
+              <img alt='' src='http://placehold.it/300x225'>
+            </figure>
+          </div>
+          <div class='card-content'>
+            <div class='content'>
+              <span class='tag is-dark subtitle'>#2</span>
+              <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
+            </div>
+          </div>
+          <footer class='card-footer'>
+            <a class='card-footer-item'>Compare</a>
+            <a class='card-footer-item'>Share</a>
+            <a class='card-footer-item'>Delete</a>
+          </footer>
+        </div>
+        <br>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(() => {
+  $('#edit-preferences').click(function(){
+   $('#edit-preferences-modal').addClass('is-active');
+  });
+  $('.modal-card-head button.delete, .modal-save, .modal-cancel').click(function(){
+    $('#edit-preferences-modal').removeClass('is-active');
+  });
+});
+</script>

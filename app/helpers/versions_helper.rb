@@ -35,11 +35,11 @@ module VersionsHelper
   def progress_bar_class(status)
     case status
     when :available
-      "bg-info"
+      "progress-bar-info"
     when :in_progress
-      "bg-warning"
+      "progress-bar-warning"
     when :complete
-      "bg-success"
+      "progress-bar-success"
     end
   end
 

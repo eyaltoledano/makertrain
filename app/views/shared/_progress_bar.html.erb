@@ -1,6 +1,20 @@
 
 <div class="progress">
+
 <% progress_hash(product.latest_version).each do |status,percent| %>
     <div class="progress-bar <%= progress_bar_class(status) %>" role="progressbar" style="width: <%=percent*100%>%"><%= status.to_s.capitalize %></div>
 <% end %>
 </div>
+
+<!--
+<div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+    Free Space
+  </div>
+  <div class="progress-bar progress-bar-warning" role="progressbar" style="width:10%">
+    Warning
+  </div>
+  <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+    Danger
+  </div>
+</div> -->

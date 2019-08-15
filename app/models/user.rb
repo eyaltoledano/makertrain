@@ -9,7 +9,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    self.image? ? self.image : "https://api.adorable.io/avatars/285/#{self.email}.png"
+    self.image? ? self.image : "https://api.adorable.io/avatars/200/#{self.email}.png"
   end
 
   def slug

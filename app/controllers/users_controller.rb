@@ -56,6 +56,7 @@ class UsersController < ApplicationController
 
   def show
     set_current_user
+    @profile_user = User.find(params[:id])
   end
 
   def edit

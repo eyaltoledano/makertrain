@@ -15,7 +15,8 @@
             <a target="_blank" class="button is-large is-link" href="http://<%= task.pr_link %>">Review this Pull Request</a>
           </p>
 
-          <p class="content is-size-4 has-text-justified">Mark this as <span class="tag is-success">Completed</span> if this PR satisfies your spec. Otherwise, you can mark it as <span class="tag is-danger">Rejected</span> and <a class="has-text-weight-semi-bold" href="/users/<%=task.user.slug%>"><%= task.user.username %></a> will be able to resubmit a new solution.</p>
+          
+          <p class="content is-size-4 has-text-justified">Mark this as <span class="tag is-success">Completed</span> if this PR satisfies your spec. Otherwise, you can mark it as <span class="tag is-danger">Rejected</span> and <a class="has-text-weight-semi-bold" href="/users/<%=task.user.id%>"><%= task.user.username %></a> will be able to resubmit a new solution.</p>
         </div>
         <div class="columns content is-vcentered">
           <div class="column is-5">
