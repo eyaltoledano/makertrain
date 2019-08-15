@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post '/give_up' => 'tasks#give_up'
   post '/update_status' => 'tasks#update_status'
 
+  resources :versions
+  
   resources :products, param: :slug do
     get ':slug/new_version' => 'versions#new'
     resources :versions, param: :version_number do

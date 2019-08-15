@@ -108,4 +108,8 @@ class User < ApplicationRecord
     self.products.count
   end
 
+  def is_owner_of?(product)
+    true if product.user == self
+  end
+
 end

@@ -11,6 +11,10 @@ class Product < ApplicationRecord
   	self.all.find{ |instance| instance.slug == slug }
   end
 
+  def next_version_number
+    "v#{self.versions.count + 1}"
+  end
+
   def latest_version
     self.versions.last
   end
@@ -31,5 +35,5 @@ class Product < ApplicationRecord
   def latest_version_contributor_count
     latest_version_contributors.count
   end
-  
+
 end

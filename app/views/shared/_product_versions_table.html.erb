@@ -7,7 +7,6 @@
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Version Number</th>
             <th>Description</th>
             <th>Progress</th>
@@ -20,9 +19,8 @@
         <tbody>
           <% @product.versions.each do |version| %>
           <tr>
-            <th><%= version.id %></th>
             <td>
-              <%= link_to "#{@product.name} #{@version.version_number}", product_version_path(@product.slug, @version.version_number), class: 'tag is-link' %>
+              <%= link_to "#{@product.name} #{version.version_number}", product_version_path(@product.slug, version.version_number), class: 'tag is-link' %>
             </td>
             <td><%= version.description %></td>
             <td><%= version.progress %>%</td>

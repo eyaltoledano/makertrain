@@ -2,7 +2,8 @@ module ApplicationHelper
   def flash_notices
     if flash.keys.present?
       if flash.keys.count == 1
-       content_tag(:div, flash[:"#{flash.keys.first}"], class: ["alert", "alert-primary"])
+       content_tag(:div, flash[:"#{flash.keys.first}"], class: ["alert", "alert-primary"]) 
+
       else
         flash.keys.each do |key|
           content_tag(:div, flash[:"#{key}"], class: ["alert", "alert-primary"])

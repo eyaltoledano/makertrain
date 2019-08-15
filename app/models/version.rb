@@ -47,6 +47,10 @@ class Version < ApplicationRecord
     contributors.uniq
   end
 
+  def unique_contributors_count
+    unique_contributors.count
+  end
+
   def progress
     completed = []
     self.tasks.each {|task| completed << task if task.status == "Completed" }

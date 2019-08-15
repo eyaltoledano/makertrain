@@ -6,7 +6,7 @@
         <th>Maker</th>
         <th><%= @pretty_latest_version_number %> Progress</th>
         <th>Available Rewards</th>
-        <th><%= @latest_version_number %> Contributors</th>
+        <th>Current Contributors</th>
       </tr>
     </thead>
 
@@ -27,7 +27,7 @@
         <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-success is-bold' %></td>
         <td>
           <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
-            contributors
+            <%= product.latest_version.unique_contributors_count %> contributors
           </a>
         </td>
       </tr>
