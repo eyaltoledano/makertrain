@@ -7,16 +7,15 @@
             <i class="em <%=@greeting[:emoji]%>"></i>
             <%= @greeting[:text] %>!
           </h1>
-          <h2 class="subtitle">
+          <h1 class="subtitle">
               <% if !@user.has_no_claimed_tasks? %>
-                <a class="tag is-link mt-4" href="/claimed_tasks"><%= tasks_to_work_on_text %></a>
+                <a class="badge badge-primary mt-4" href="/claimed_tasks"><%= tasks_to_work_on_text %></a>
               <% end %>
 
               <% if @user.has_items_for_review? %>
-                <a class="tag is-warning mt-4" href="/review_tasks"><%= open_tasks_for_review_text %></a>
+                <a class="badge badge-primary mt-4" href="/review_tasks"><%= open_tasks_for_review_text %></a>
               <% end %>
-            </p>
-          </h2>
+          </h1>
         </div>
 
         <div class="column">

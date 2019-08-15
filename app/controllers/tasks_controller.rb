@@ -103,7 +103,7 @@ class TasksController < ApplicationController
 
       @task_user = @task.user
 
-      if @task.status == "Complete"
+      if @task.status == "Completed"
         @task_user.balance = @task_user.balance + @task.reward
         @task_user.save
       end
@@ -126,6 +126,7 @@ class TasksController < ApplicationController
 
     if @task.status == "Completed"
       rewardee = @task.user
+      rewardee.balance = 0 if rewardee.balance.nil?
       rewardee.balance += @task.reward.to_f
       rewardee.save
     end
