@@ -70,7 +70,7 @@ class TasksController < ApplicationController
     @task.user = nil
     @task.status = "Open"
     @task.save
-    flash[:notice] = "You gave up on Task ##{@task.id}. On to the next!"
+    flash[:notice] = "You gave up on #{@task.name}. On to the next!"
     redirect_to claimed_tasks_path
   end
 
@@ -93,7 +93,7 @@ class TasksController < ApplicationController
     @task.pr_link = params[:pr_link]
 
     if @task.save
-      flash[:notice] = "The status for #{@task.name} was updated to #{@task.status}."
+      flash[:notice] = "The status for #{@task.name} was updated to '#{@task.status}'."
 
       @task_user = @task.user
 

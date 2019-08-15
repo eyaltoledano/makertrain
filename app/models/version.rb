@@ -85,4 +85,8 @@ class Version < ApplicationRecord
     "v#{self.product.versions.count + 1}"
   end
 
+  def tasks_claimable_first
+    self.tasks.order(user_id: :desc)
+  end
+
 end

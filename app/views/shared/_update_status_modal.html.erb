@@ -20,7 +20,10 @@
 
             <div class="select is-medium">
               <select id="status" class="input" type="text" name="status" placeholder="Choose a status">
-                <option value="Select a status">Select a status</option>
+                <% if task.status == "Claimed" %>
+                  <option value="Select a status">Select a status</option>
+                <% end %>
+
                 <% @status_list.each do |status| %>
                 <option <% if status == task.status %> selected <%end%> value="<%= status %>"><%= status %></option>
                 <% end %>
