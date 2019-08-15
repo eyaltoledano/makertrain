@@ -2,7 +2,7 @@ module ApplicationHelper
   def flash_notices
     if flash.keys.present?
       if flash.keys.count == 1
-       content_tag(:div, flash[:"#{flash.keys.first}"], class: ["alert", "alert-primary"]) 
+       content_tag(:div, flash[:"#{flash.keys.first}"], class: ["alert", "alert-primary"])
 
       else
         flash.keys.each do |key|
@@ -14,6 +14,10 @@ module ApplicationHelper
 
   def money(number)
     "$#{sprintf "%.2f", number}"
+  end
+
+  def shortmoney(number)
+    "$#{sprintf "%.0f", number}"
   end
 
   def time_month_date_year(timestamp)

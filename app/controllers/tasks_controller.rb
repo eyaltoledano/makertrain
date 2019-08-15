@@ -7,14 +7,13 @@ class TasksController < ApplicationController
     set_current_user
     @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
-    @version = Version.find_by_version_number(params[:version_version_number])
+    @version = @product.versions.find_by_version_number(params[:version_version_number])
     if params[:id].to_i == 0 # if it's 0, it's a string of words (a task_slug)
-      @task = Task.find_by_slug(params[:id])
-      # binding.pry
+      @task = @version.tasks.find_by_slug(params[:slug])
     else
-      @task = Task.find(params[:id])
+      @task = @version.tasks.find(params[:id])
     end
-
+    @task_contributor = @task.user
   end
 
   def new
@@ -22,7 +21,7 @@ class TasksController < ApplicationController
     redirect_if_not_logged_in
     @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
-    @version = Version.find_by_version_number(params[:version_version_number])
+    @version = @product.versions.find_by_version_number(params[:version_version_number])
 
     if @user != @product.user
       flash[:notice] = "Only the owner of #{@product.name} can create new tasks for #{@version.version_number}."
@@ -34,7 +33,7 @@ class TasksController < ApplicationController
     set_current_user
     @product = Product.find_by_slug(task_params[:product_slug])
     @user = @product.user
-    @version = Version.find_by_version_number(task_params[:version_version_number])
+    @version = @product.versions.find_by_version_number(task_params[:version_version_number])
 
     if task_params.any? == ""
       flash[:notice] = "The task you tried to submit is missing some information. Try again."

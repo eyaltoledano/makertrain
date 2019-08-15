@@ -53,6 +53,12 @@ footer {
   top: -1px;
 }
 
+.dropdown-menu {
+    min-width: 20rem!important;
+    margin-left: -220px;
+    margin-top: 9px;
+}
+
 #product-show-status {
   --color-white: #fff;
   --color-black: #333;

@@ -29,24 +29,38 @@
             <img src="<%= @user.avatar_url %>">
           </div>
           <div class="dropdown-menu">
-            <h6 class="dropdown-header">My Products</h6>
+            <h6 class="dropdown-header">My Product Portfolio</h6>
             <% if !@user.products.empty? %>
               <% @user.products.each do |product| %>
                 <% unless product.id.nil? %>
                 <div class="dropdown-item">
-                  <span class="tag"><%= product.versions.last.version_number %></span>
                   <%= link_to product.name, product_path(product.slug) %>
-
+                  <span class="tag is-link is-pulled-right"><%= link_to  product.latest_version_number, product_version_path(product.slug,product.latest_version_number), class: 'has-text-white' %></span>
                 </div>
                 <% end %>
               <% end %>
+              <div class="dropdown-item">
+                <%= link_to "Browse Portfolio", portfolio_path %>
+              </div>
             <% else %>
               <a class="dropdown-item disabled">No products</a>
             <% end %>
+            <div class="dropdown-divider"></div>
+
             <h6 class="dropdown-header">My Tasks</h6>
             <% @user.claimed_tasks.each do |task| %>
-              <%= link_to task.name, product_version_task_path(task.product.slug, task.version.version_number, task.slug), class: 'dropdown-item' %>
+              <div class="dropdown-item">
+
+                <%= link_to task.name, product_version_task_path(task.product.slug, task.version.version_number, task.slug) %>
+                <span class="tag is-success is-small is-pulled-right">
+                  <%=link_to shortmoney(task.reward), claimed_tasks_path, class: 'has-text-white'%>
+                </span>
+              </div>
+
             <% end %>
+              <div class="dropdown-item">
+                <%= link_to "Browse All Claimed Tasks", claimed_tasks_path %>
+              </div>
             <div class="dropdown-divider"></div>
             <%= link_to "Profile Settings", edit_user_path(@user), class: "dropdown-item" %>
           </div>
