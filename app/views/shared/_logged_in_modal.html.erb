@@ -7,7 +7,7 @@
       </p>
       <button class="delete" aria-label="close"></button>
     </header>
-    <section class="modal-card-body">
+    <div class="modal-card-body">
       <div class="container ">
         <div class="column">
           <p class="headline">
@@ -17,14 +17,17 @@
           </p>
         </div>
       </div>
-    </section>
-    <footer class="modal-card-foot">
 
-      <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/claim" method="post">
-        <input type="hidden" name="_method" value="PATCH">
+      <div class="card-footer">
+        <div class="d-flex justify-content-center">
+          <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/claim" method="post">
+            <input type="hidden" name="_method" value="PATCH">
 
-        <input class="button is-link" type="submit" value="Claim this task">
-        </form>
-    </footer>
+            <input class="button is-link" type="submit" value="Claim this task">
+            </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

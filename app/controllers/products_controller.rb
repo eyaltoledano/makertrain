@@ -52,11 +52,11 @@ class ProductsController < ApplicationController
 
     if params[:version_number].present?
       @product = Product.find_by_slug(params[:slug])
-      @user = @product.user
+      @product_user = @product.user
       @version = @product.versions.find_by_version_number(params[:version_number])
     else
       @product = Product.find_by_slug(params[:slug])
-      @user = @product.user
+      @product_user = @product.user
       @version = @product.versions.last
     end
 

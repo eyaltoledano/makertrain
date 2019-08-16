@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   def show
     set_current_user
     @product = Product.find_by_slug(params[:product_slug])
-    @user = @product.user
+    # @user = @product.user
     @version = @product.versions.find_by_version_number(params[:version_version_number])
     if params[:id].to_i == 0 # if it's 0, it's a string of words (a task_slug)
       @task = @version.tasks.find_by_slug(params[:slug])
