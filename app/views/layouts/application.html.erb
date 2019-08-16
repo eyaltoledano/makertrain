@@ -27,11 +27,13 @@
       <%= render 'shared/logged_in_navigation' %>
       <div class="container">
         <%= flash_notices %>
+        <%= render 'shared/error_notices' %>
       </div>
     <% else %>
       <%= render 'shared/logged_out_navigation' %>
       <div class="container">
         <%= flash_notices %>
+        <%= render 'shared/error_notices' %>
       </div>
     <% end %>
 

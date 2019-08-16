@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :products
   has_many :version_users
   has_many :versions, through: :version_users
+  validates :email, uniqueness: true
+  validates :username, presence: true
+  validates :username, uniqueness: true
 
   def name
     self.display_name? ? self.display_name : self.username

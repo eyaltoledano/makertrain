@@ -5,6 +5,7 @@ class VersionsController < ApplicationController
     @version = @product.versions.find_by_version_number(params[:version_number])
     @task = @version.tasks.build(reward: 0)
     @task.product = @product
+    @version_tasks_claimable_first = @version.tasks_claimable_first # Pagy this
   end
 
   def new

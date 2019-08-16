@@ -1,0 +1,67 @@
+<% if @user.present? %>
+  <% if @user.errors.any? %>
+    <div role="alert" class="alert alert-danger" id="error_explanation">
+      <h2 class="font-weight-bold">
+        <%= pluralize(@user.errors.count, "error") %>
+        prohibited your account from being created:
+      </h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @product.present? %>
+  <% if @product.errors.any? %>
+    <div role="alert" class="alert alert-danger" id="error_explanation">
+      <h2 class="font-weight-bold">
+        <%= pluralize(@product.errors.count, "error") %>
+        prohibited your product from being created:
+      </h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @version.present? %>
+  <% if @version.errors.any? %>
+    <div role="alert" class="alert alert-danger" id="error_explanation">
+      <h2 class="font-weight-bold">
+        <%= pluralize(@version.errors.count, "error") %>
+        prohibited this version from being created:
+      </h2>
+
+      <ul>
+      <% @version.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @task.present? %>
+  <% if @task.errors.any? %>
+    <div role="alert" class="alert alert-danger" id="error_explanation">
+      <h2 class="font-weight-bold">
+        <%= pluralize(@task.errors.count, "error") %>
+        prohibited this task from being created:
+      </h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

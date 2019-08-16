@@ -49,7 +49,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Welcome to Makertrain, #{@user.username}!"
       redirect_to dashboard_path
     else
-      flash[:notice] = "Something went wrong"
       render :new
     end
   end

@@ -19,7 +19,7 @@
           </thead>
 
           <tbody>
-            <% @version.tasks_claimable_first.each do |task| %>
+            <% @version_tasks_claimable_first.each do |task| %>
              <% if task.persisted? %>
                 <tr>
                   <td><a href="/products/<%= @product.slug %>/versions/<%= @version.version_number %>/tasks/<%= task.slug %>"><%= task.name %></a>
