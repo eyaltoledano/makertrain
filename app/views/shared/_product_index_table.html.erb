@@ -1,39 +1,55 @@
 <section>
-  <table class="table">
-    <thead class="head-light">
-      <tr>
-        <th>Product</th>
-        <th>Maker</th>
-        <th><%= @pretty_latest_version_number %> Progress</th>
-        <th>Available Rewards</th>
-        <th>Current Contributors</th>
-      </tr>
-    </thead>
+  <div class="d-flex justify-content-center mb-2">
+    <h1 class=" heading">There <%= "#{'is'.pluralize(@number_of_products)} #{@number_of_products}" %> promising <%= 'product'.pluralize(@number_of_products) %> looking for talented contributors</h1>
+  </div>
 
-    <tbody>
-      <% @products.each do |product| %>
-      <%= render partial: '/shared/version_contributors_modal', locals: { product: product, version: product.latest_version } %>
+  <div class="card">
+    <div class="card-body">
+      <table class="table" style="min-height:500px;">
+        <thead class="head-light">
+          <tr>
+            <th>Product</th>
+            <th>Maker</th>
+            <th><%= @pretty_latest_version_number %> Progress</th>
+            <th>Available Rewards</th>
+            <th>Current Contributors</th>
+          </tr>
+        </thead>
 
-      <tr>
-        <td>
-          <%= link_to product.name, product_path(product.slug) %>
-          <%= link_to "#{product.latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-link is-small' %>
-          <span class="tag is-small"><%= product.status %></span>
-        </td>
-        <td><%= link_to product.user.name, user_path(product.user) %></td>
-        <td>
-          <%= render partial: '/shared/progress_bar', locals: {product: product} %>
-        </td>
-        <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-success is-bold' %></td>
-        <td>
-          <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
-            <%= product.latest_version.unique_contributors_count %> contributors
-          </a>
-        </td>
-      </tr>
+        <tbody>
+          <% @products.each do |product| %>
+          <%= render partial: '/shared/version_contributors_modal', locals: { product: product, version: product.latest_version } %>
+
+          <tr>
+            <td>
+              <%= link_to product.name, product_path(product.slug) %>
+              <%= link_to "#{product.latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-link is-small' %>
+              <span class="tag is-small"><%= product.status %></span>
+            </td>
+            <td><%= link_to product.user.name, user_path(product.user) %></td>
+            <td>
+              <%= render partial: '/shared/progress_bar', locals: {product: product} %>
+            </td>
+            <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-success is-bold' %></td>
+            <td>
+              <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
+                <%= product.latest_version.unique_contributors_count %> contributors
+              </a>
+            </td>
+          </tr>
 
 
-      <% end %>
-    </tbody>
-  </table>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-center">
+        <%= pagy_bulma_nav(@pagy).html_safe %>
+      </div>
+    </div>
+  </div>
+
+
+
+
 </section>

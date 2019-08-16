@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def flash_notices
     if flash.keys.present?
       if flash.keys.count == 1

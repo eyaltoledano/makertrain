@@ -26,6 +26,9 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-producthunt', git: 'https://github.com/lukaszkorecki/omniauth-producthunt.git'
 
+gem 'pagy'
+gem 'oj'
+
 group :product do
   gem 'pg'
 end

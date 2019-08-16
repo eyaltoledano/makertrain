@@ -1,11 +1,12 @@
 class VersionsController < ApplicationController
+
   def show
     set_current_user
     @product = Product.find_by_slug(params[:product_slug])
     @version = @product.versions.find_by_version_number(params[:version_number])
     @task = @version.tasks.build(reward: 0)
     @task.product = @product
-    @version_tasks_claimable_first = @version.tasks_claimable_first # Pagy this
+    @pagy, @version_tasks_claimable_first = pagy(@version.tasks_claimable_first, items: 10) # Pagy pagination
   end
 
   def new

@@ -16,7 +16,7 @@
     </thead>
 
     <tbody>
-      <% @user.claimed_tasks.each do |task| %>
+      <% @user_claimed_tasks.each do |task| %>
           <tr>
             <td>
               <%= link_to task.product.name, product_path(task.product.slug) %>

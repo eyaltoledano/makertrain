@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
   def index
     set_current_user
-    @products = Product.all
+    @pagy, @products = pagy(Product.all, items: 15)
+    @number_of_products = Product.all.count
     if @products.empty?
       @latest_version_number = nil
       @pretty_latest_version_number = nil

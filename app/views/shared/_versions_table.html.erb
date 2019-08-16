@@ -48,10 +48,16 @@
                   </td>
                   <td><%= task.status %></td>
                 </tr>
+
+
               <% end %>
             <% end %>
           </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+          <%= pagy_bulma_nav(@pagy).html_safe %>
+        </div>
+
       </div>
     </div>
   </section>
