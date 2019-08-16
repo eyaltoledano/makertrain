@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
             u.username = auth[:info][:username]
           end
           u.email = auth[:info][:email]
-          binding.pry
           if auth[:info][:image].present?
             u.image = auth[:info][:image]
           else
