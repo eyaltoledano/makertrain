@@ -1,0 +1,30 @@
+<div class="modal" id="claimModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        <strong class="has-text-link"><%=task.name%></strong>
+      </p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container ">
+        <div class="column">
+          <p class="headline">
+            <strong>Do you want to claim this task?</strong>
+
+            <p class="is-small has-text-dark">To earn this task's $<%= task.reward%> reward, you'll have to submit a Github pull request and provide that link. If accepted by the owner of the product, your reward will be added to your balance.</p>
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+
+      <form action="/products/<%=task.product.slug%>/versions/<%=task.version.version_number%>/tasks/<%=task.id%>/claim" method="post">
+        <input type="hidden" name="_method" value="PATCH">
+
+        <input class="button is-link" type="submit" value="Claim this task">
+        </form>
+    </footer>
+  </div>
+</div>

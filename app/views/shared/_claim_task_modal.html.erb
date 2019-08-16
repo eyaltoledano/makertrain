@@ -1,0 +1,6 @@
+
+<% if logged_in? %>
+  <%= render partial: '/shared/logged_in_modal', locals: { task: task } %>
+<% else %>
+  <%= render partial: '/shared/logged_out_modal', locals: { task: task } %>
+<% end %>

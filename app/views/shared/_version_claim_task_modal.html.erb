@@ -1,3 +1,5 @@
+<% if logged_in? %>
+
 <div class="modal" id="claimModal-<%= task.id %>">
   <div class="modal-background"></div>
   <div class="modal-card">
@@ -25,8 +27,12 @@
         <%= submit_tag "Claim this task", class: 'button is-link is-large' %>
       <% end %>
 
-
-
     </footer>
   </div>
 </div>
+
+<% else %>
+
+  <%= render partial: '/shared/logged_out_modal', locals: { task: task } %>
+
+<% end %>

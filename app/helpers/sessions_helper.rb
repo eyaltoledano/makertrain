@@ -8,4 +8,8 @@ module SessionsHelper
       "Signup"
     end
   end
+
+  def current_page
+    current_uri = request.env['PATH_INFO']
+  end
 end

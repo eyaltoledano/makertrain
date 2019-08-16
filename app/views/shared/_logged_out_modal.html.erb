@@ -1,0 +1,30 @@
+<div class="modal" id="<% if !current_page.include?("tasks") %><%= "claimModal-#{task.id}" %><%else%>claimModal<%end%>">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        <strong class="has-text-link"><%=task.name%></strong>
+      </p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="container ">
+        <div class="column">
+          <p class="headline">
+            <strong>You need to be logged in to claim Makertrain tasks</strong>
+
+          </p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class=" card-footer">
+          <div class="buttons">
+            <%= link_to "Login", login_path, class: 'btn btn-light' %>
+            <%= link_to "Signup", signup_path, class: 'btn btn-primary mx-2' %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
