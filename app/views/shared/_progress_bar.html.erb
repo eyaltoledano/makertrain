@@ -7,8 +7,8 @@
     data-toggle="tooltip"
     data-placement="top"
     data-container="body"
-    title="<%= progress_bar_popover_content(product.latest_version, status) %>">
-      <%= "#{status.to_s.capitalize.humanize.titleize} (#{percent.to_i}%)" %>
+    title="<%= "#{progress_bar_popover_content(product.latest_version, status)} (#{percent.to_i}%)" %>">
+      <%= progress_bar_popover_content(product.latest_version, status) %>
     </div>
 <% end %>
 </div>

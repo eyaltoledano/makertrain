@@ -4,7 +4,8 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :versions
 
   def slug
-  	self.name.gsub(" ", "-").downcase
+    self.name.gsub(" ", "-").downcase.gsub(".", "-").gsub("'", "-")
+
   end
 
   def self.find_by_slug(slug)
