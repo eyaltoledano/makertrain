@@ -25,7 +25,7 @@
     <li class="<%= subnavigation_class_name("claimed") %>">
       <a href="/claimed_tasks">My Claimed Tasks
         <span class="tag">
-          <%= @user.open_claimed_tasks_count %>
+          <%= "#{money(@user.claimed_task_value)} (#{@user.open_claimed_tasks_count})" %>
         </span>
       </a>
     </li>

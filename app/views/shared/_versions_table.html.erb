@@ -5,6 +5,7 @@
       <div class="card-body">
         <% if logged_in? && current_user.is_owner_of?(@version.product) %>
           <a data-target="#taskModal" aria-haspopup="true" class="button is-small modal-button is-pulled-right">New task</a>
+          <%= render partial: '/shared/version_contributors_modal', locals: { product: @product, version: @version } %>
         <% end %>
 
         <table class="table">

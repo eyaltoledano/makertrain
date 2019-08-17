@@ -22,7 +22,7 @@ class TasksController < ApplicationController
     @product = Product.find_by_slug(params[:product_slug])
     @user = @product.user
     @version = @product.versions.find_by_version_number(params[:version_version_number])
-
+    # @task = @version.tasks.build
     if @user != @product.user
       flash[:notice] = "Only the owner of #{@product.name} can create new tasks for #{@version.version_number}."
       redirect_to product_version_path(@product.slug, @version.version_number)

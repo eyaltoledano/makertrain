@@ -7,7 +7,7 @@ module VersionsHelper
 
       if task.status == "New" || task.status == "Open"
         status_hash[:available] << task
-      elsif task.status ==  "Claimed" || task.status == "Researching" || task.status == "Writing specs" || task.status == "In progress" || task.status == "Ready for Review"
+      elsif task.status ==  "Claimed" || task.status == "Researching" || task.status == "Writing specs" || task.status == "In progress" || task.status == "Ready for Review" || task.status == "PR Submitted"
         status_hash[:in_progress] << task
       elsif task.status == "Reviewing" || task.status == "Accepted" || task.status == "Rejected"
         status_hash[:in_review] << task
@@ -32,7 +32,7 @@ module VersionsHelper
 
       if task.status == "New" || task.status == "Open"
         status_hash[:available] << task
-      elsif task.status ==  "Claimed" || task.status == "Researching" || task.status == "Writing specs" || task.status == "In progress" || task.status == "Ready for Review"
+      elsif task.status ==  "Claimed" || task.status == "Researching" || task.status == "Writing specs" || task.status == "In progress" || task.status == "Ready for Review" || task.status == "PR Submitted"
         status_hash[:in_progress] << task
       elsif task.status == "Reviewing" || task.status == "Accepted" || task.status == "Rejected"
         status_hash[:in_review] << task

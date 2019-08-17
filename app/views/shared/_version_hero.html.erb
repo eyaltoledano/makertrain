@@ -43,7 +43,7 @@
               <div>
                 <p class="heading">Contributors</p>
 
-                <a data-target="#contributorsModal" aria-haspopup="true" class="title modal-button tag is-link is-large">
+                <a data-target="#contributorsModal-<%=@version.id%>" aria-haspopup="true" class="title modal-button tag is-link is-large">
                   <%= @version.unique_contributors.count if @version %>
                 </a>
                 </a>
