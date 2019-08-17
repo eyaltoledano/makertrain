@@ -28,7 +28,7 @@
             <td width="40%"><%= task.description %></td>
             <td>
               <strong class="has-text-success">
-                $ <%= sprintf "%.2f", task.reward %>
+                <%= money(task.reward) %>
               </strong>
             </td>
             <td>
@@ -64,6 +64,10 @@
       <% end %>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-center">
+    <%= pagy_bulma_nav(@pagy).html_safe %>
+  </div>
 
   <% else %>
 

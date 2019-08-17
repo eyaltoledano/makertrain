@@ -27,7 +27,7 @@
               <div>
                 <p class="heading">Claimed Tasks Value</p>
                 <p class="title has-text-success has-text-weight-semibold">
-                  $<%= sprintf "%.2f", @user.claimed_task_value %>
+                  <%= money(@user.claimed_task_value) %>
                 </p>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <div>
                 <p class="heading">Pending Rewards</p>
                 <p class="<%= pending_balance_class_name %>">
-                  $<%= sprintf "%.2f", @user.pending_balance %>
+                  <%= money(@user.pending_balance) %>
                 </p>
               </div>
             </div>

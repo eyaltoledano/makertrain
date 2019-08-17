@@ -15,11 +15,8 @@ module ApplicationHelper
   end
 
   def money(number)
-    "$#{sprintf "%.2f", number}"
-  end
-
-  def shortmoney(number)
-    "$#{sprintf "%.0f", number}"
+    number = number_with_precision(number, :precision => 0, :delimiter => ',')
+    "$#{number}"
   end
 
   def time_month_date_year(timestamp)

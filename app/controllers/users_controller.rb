@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     support_nil_user_balance
     status_lists
     greeting_helper
-    @user_claimed_tasks = @user.claimed_tasks
+    @pagy, @user_claimed_tasks = pagy(@user.claimed_tasks, items: 10)
   end
 
   def owned_products

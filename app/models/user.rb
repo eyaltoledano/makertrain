@@ -28,11 +28,7 @@ class User < ApplicationRecord
   end
 
   def claimed_tasks # outputs array of tasks
-    claimed_tasks = []
-    Task.all.each do |task|
-      claimed_tasks << task if task.user == self
-    end
-    claimed_tasks
+    Task.all.where(user: self)
   end
 
   def claimed_tasks_count
