@@ -13,10 +13,12 @@ class ProductsController < ApplicationController
   end
 
   def new
-    set_current_user
     redirect_if_not_logged_in
-    @product = @user.products.build
-    @version = @product.versions.build(version_number: "v1")
+    if logged_in?
+      set_current_user
+      @product = @user.products.build
+      @version = @product.versions.build(version_number: "v1")
+    end
   end
 
   def create
