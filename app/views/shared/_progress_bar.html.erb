@@ -1,16 +1,24 @@
 
 <div class="progress">
+  <% if progress_hash_empty?(product.latest_version) %>
 
-<% progress_hash(product.latest_version).each do |status,percent| %>
-    <div
-    class="progress-bar <%= progress_bar_class(status) %>" style="height: 1.5rem; width: <%="#{percent}%"%>"
-    data-toggle="tooltip"
-    data-placement="top"
-    data-container="body"
-    title="<%= "#{progress_bar_popover_content(product.latest_version, status)} (#{percent.to_i}%)" %>">
-      <%= progress_bar_popover_content(product.latest_version, status) %>
-    </div>
-<% end %>
+  <div
+  class="progress-bar bg-light has-text-dark" style="height: 1.5rem; width: 100%;" title="test">
+    This version doesn't have any tasks yet
+  </div>
+
+  <% else %>
+    <% progress_hash(product.latest_version).each do |status,percent| %>
+      <div
+      class="progress-bar <%= progress_bar_class(status) %>" style="height: 1.5rem; width: <%="#{percent}%"%>"
+      data-toggle="tooltip"
+      data-placement="top"
+      data-container="body"
+      title="<%= "#{progress_bar_popover_content(product.latest_version, status)} (#{percent.to_i}%)" %>">
+        <%= progress_bar_popover_content(product.latest_version, status) %>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 <script type="text/javascript">

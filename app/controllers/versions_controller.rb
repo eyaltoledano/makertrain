@@ -32,7 +32,6 @@ class VersionsController < ApplicationController
     @version = @product.versions.build(version_params)
     @version.version_number = @product.next_version_number
     @version.user = @product.user
-    binding.pry
 
     if @product.save
       flash[:notice] = "#{@product.name} #{@version.version_number} was successfully created!"
