@@ -29,7 +29,7 @@
             <img src="<%= @user.avatar_url %>">
           </div>
           <div class="dropdown-menu">
-            <h6 class="dropdown-header">My Product Portfolio</h6>
+            <h6 class="dropdown-header heading">My Product Portfolio</h6>
             <% if !@user.products.empty? %>
               <% @user.products.first(5).each do |product| %>
                 <% unless product.id.nil? %>
@@ -47,7 +47,7 @@
             <% end %>
             <div class="dropdown-divider"></div>
 
-            <h6 class="dropdown-header">My Tasks</h6>
+            <h6 class="dropdown-header heading">My Tasks <small>(<%= money(@user.claimed_task_value) %>)</small></h6>
             <% @user.claimed_tasks.first(10).each do |task| %>
               <div class="dropdown-item">
 

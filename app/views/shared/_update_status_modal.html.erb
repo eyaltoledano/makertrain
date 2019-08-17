@@ -6,20 +6,19 @@
       <p class="modal-card-title">
         <strong class="has-text-link"><%=task.name%></strong>
         <label class="label">Current Status: <%= task.status %></label>
-
       </p>
       <button class="delete" aria-label="close"></button>
     </header>
-    <section class="modal-card-body">
+    <div class="modal-card-body">
       <div class="container has-text-centered">
-        <div class="columns">
-          <div class="column ">
+        <%= form_tag update_status_path do %>
+        <%= hidden_field_tag "task_id", task.id %>
 
-            <%= form_tag update_status_path do %>
-              <%= hidden_field_tag "task_id", task.id %>
-
-            <div class="select is-medium">
-              <select id="status" class="input" type="text" name="status" placeholder="Choose a status">
+        <div>
+          <div class="field">
+            <p class="control">
+              <label class="label"><small><strong>Choose a status</strong></small></label>
+              <select id="status" class="form-control" type="text" name="status" placeholder="Choose a status">
                 <% if task.status == "Claimed" %>
                   <option value="Select a status">Select a status</option>
                 <% end %>
@@ -28,33 +27,28 @@
                 <option <% if status == task.status %> selected <%end%> value="<%= status %>"><%= status %></option>
                 <% end %>
               </select>
-            </div>
-
+            </p>
           </div>
+        </div>
 
-          <div class="column is-three-fifths">
+          <div class="mt-2">
             <div class="field">
               <p class="control">
-                <%= text_field_tag "pr_link", nil, class: 'form-control form-control-lg', placeholder: "Pull Request URL (When Ready)" %>
+                <%= text_field_tag "pr_link", nil, class: 'form-control', placeholder: "Pull Request URL (When Ready)" %>
               </p>
             </div>
           </div>
 
-        </div>
-
-        <div class="">
-          <div class="column ">
+          <div class="mt-2">
             <!-- Start Update Status button -->
-            <%= submit_tag "Update status", class: 'btn btn-primary is-medium' %>
-            <% end %>
+            <%= submit_tag "Update status", class: 'btn btn-primary btn-block' %>
+            <!-- End update status button -->
+        <% end %>
 
           </div>
-        </div>
-
-  <!-- End update status button -->
 
         <!-- Start give up on task button -->
-        <div class="column">
+        <div class="mt-4">
             <div>
               <div class="card">
                 <div class="card-body">
@@ -71,14 +65,8 @@
         </div>
         <!-- End give up on task button -->
       </div>
-    </section>
+    </div>
 
-
-    <footer class="modal-card-foot">
-
-
-
-    </footer>
   </div>
 </div>
 <!-- End Status Modal -->

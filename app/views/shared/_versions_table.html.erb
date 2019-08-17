@@ -1,7 +1,7 @@
 <!-- Start versions table -->
 <% if @version.has_at_least_one_persisted_task? %>
   <section class="container mt-4" id="version-tasks-table-section">
-    <div class="card">
+    <div class="card mb-5">
       <div class="card-body">
         <% if logged_in? && current_user.is_owner_of?(@version.product) %>
           <a data-target="#taskModal" aria-haspopup="true" class="button is-small modal-button is-pulled-right">New task</a>

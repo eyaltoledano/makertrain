@@ -6,7 +6,6 @@
     <thead>
       <tr>
         <th>Product</th>
-        <th>Version</th>
         <th>Task Name</th>
         <th>Description</th>
         <th>Reward</th>
@@ -20,10 +19,9 @@
           <tr>
             <td>
               <%= link_to task.product.name, product_path(task.product.slug) %>
-            </td>
-            <td>
               <%= link_to task.version.version_number, product_version_path(task.product.slug, task.version.version_number), class: 'tag' %>
             </td>
+
             <td><strong><%= link_to task.name, product_version_task_path(task.product.slug, task.version.version_number, task.slug) %></strong></td>
             <td width="40%"><%= task.description %></td>
             <td>
@@ -37,7 +35,7 @@
             <td>
               <% if task.status == "Completed" %>
               <a class=" button is-small is-success is-inverted" disabled>
-                <strong><i class="fas fa-check-double has-text-success"></i> Complete +$<%=  sprintf "%.2f", task.reward %></strong>
+                <strong><i class="fas fa-check-double has-text-success"></i> Complete +<%=  money(task.reward) %></strong>
               </a>
               <% elsif task.status == "PR Submitted" %>
               <a class=" button is-small is-inverted" disabled>
@@ -49,7 +47,7 @@
               <a class=" button is-small is-success is-inverted" disabled>
                 <span><i class="fas fa-check has-text-success"></i> Accepted!</span>
               <% elsif task.status == "Rejected" %>
-              <a data-target="#statusModal-<%=task.id%>" aria-haspopup="true" class="modal-button button is-small is-danger">
+              <a data-target="#statusModal-<%=task.id%>" aria-haspopup="true" class="modal-button button is-small is-danger is-inverted">
                 <span><i class="fas fa-exclamation-triangle"></i> Submit New PR</span>
               </a>
               <%= render partial: '/shared/update_status_modal', locals: {task: task} %>
