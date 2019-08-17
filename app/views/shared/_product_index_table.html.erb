@@ -18,13 +18,11 @@
 
         <tbody>
           <% @products.each do |product| %>
-          <%= render partial: '/shared/version_contributors_modal', locals: { product: product, version: product.latest_version } %>
 
           <tr>
             <td>
               <%= link_to product.name, product_path(product.slug) %>
               <%= link_to "#{product.latest_version_number}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-link is-small' %>
-              <span class="tag is-small"><%= product.status %></span>
             </td>
             <td><%= link_to product.user.name, user_path(product.user) %></td>
             <td>
@@ -32,9 +30,10 @@
             </td>
             <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-success is-bold' %></td>
             <td>
-              <a data-target="#contributorsModal" aria-haspopup="true" class=" modal-button tag">
+              <a data-target="#contributorsModal-<%=product.latest_version.id%>" aria-haspopup="true" class=" modal-button tag">
                 <%= pluralize(product.latest_version.unique_contributors_count, 'contributor') %>
               </a>
+              <%= render partial: '/shared/version_contributors_modal', locals: { product: product, version: product.latest_version } %>
             </td>
           </tr>
 
