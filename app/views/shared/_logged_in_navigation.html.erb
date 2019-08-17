@@ -62,6 +62,7 @@
                 <%= link_to "Browse All Claimed Tasks", claimed_tasks_path %>
               </div>
             <div class="dropdown-divider"></div>
+            <%= link_to "My Profile", user_path(@user), class: "dropdown-item" %>
             <%= link_to "Profile Settings", edit_user_path(@user), class: "dropdown-item" %>
           </div>
         </div>
