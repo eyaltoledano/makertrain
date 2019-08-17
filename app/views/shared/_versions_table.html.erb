@@ -1,6 +1,6 @@
 <!-- Start versions table -->
 <% if @version.has_at_least_one_persisted_task? %>
-  <section class="container mt-4" id="version-tasks-table-section">
+  <section class="mt-4" id="version-tasks-table-section">
     <div class="card mb-5">
       <div class="card-body">
         <% if logged_in? && current_user.is_owner_of?(@version.product) %>
