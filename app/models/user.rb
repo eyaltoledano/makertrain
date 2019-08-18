@@ -12,6 +12,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url
+    # if the user doesn't have an image, we assign one using the adorable.io url and interpolating the user's email such that the generated image is unique always the same for the user
     self.image? ? self.image : "https://api.adorable.io/avatars/200/#{self.email}.png"
   end
 
