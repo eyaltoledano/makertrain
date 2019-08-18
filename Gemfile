@@ -28,6 +28,7 @@ gem 'omniauth-producthunt', git: 'https://github.com/lukaszkorecki/omniauth-prod
 
 gem 'pagy'
 gem 'oj'
+gem 'inline_svg'
 
 group :product do
   gem 'pg'
