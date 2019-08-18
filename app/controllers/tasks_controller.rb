@@ -82,11 +82,11 @@ class TasksController < ApplicationController
   def update_status
     @task = Task.find(claim_params[:task_id])
     if params[:status] == "Select a status"
-      flash[:notice] = "You need to select a new status for #{@task.name}. Please try again."
-      redirect_to claimed_tasks_path
+      flash[:notice] = "Don't forget to select the new status for '#{@task.name}'. Please try again."
+      redirect_to claimed_tasks_path and return
     elsif params[:status] == "Ready for Review" && !params[:pr_link].include?("github.com")
-      flash[:notice] = "Please make sure to submit your task with a valid Pull Request URL from GitHub. Your PR should be submitted to the project's repository."
-      redirect_to claimed_tasks_path
+      flash[:notice] = "Please make sure to submit your task with a valid Pull Request URL from GitHub. Your PR should be submitted to the project's repository"
+      redirect_to claimed_tasks_path and return
     end
 
     if params[:status] == "Ready for Review"
