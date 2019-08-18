@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
           u.password = SecureRandom.hex
         end
         session[:user_id] = @user.id
-        flash[:notice] = "Welcome to Makertrain! You should take a second to set a password and a custom display name if you'd like one."
+        flash[:notice] = "Welcome to Indie Makers! You should take a second to set a password and a custom display name if you'd like one."
         redirect_to edit_user_path(@user)
       end
     else

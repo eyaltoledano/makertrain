@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Welcome to Makertrain, #{@user.username}!"
+      flash[:notice] = "Welcome to Indie Makers, #{@user.username}!"
       redirect_to dashboard_path
     else
       render :new
