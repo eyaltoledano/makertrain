@@ -27,7 +27,6 @@
 
               <% if task.status == "Ready for Review" || task.status == "Reviewing" || task.status == "PR Submitted" ||
             task.status == "Accepted" %>
-              <%= render partial: '/shared/review_tasks_modal', locals: { task: task } %>
                 <tr>
                   <th><%= task.id %></th>
                   <td><a href="/products/<%= task.product.slug %>">
@@ -40,7 +39,7 @@
                   <td><%= task.description %></td>
                   <td>
                     <strong class="has-text-success">
-                      $ <%= sprintf "%.2f", task.reward %>
+                      <%= money(task.reward) %>
                     </strong>
                   </td>
                   <td>
@@ -56,12 +55,15 @@
                       <a data-target="#reviewTaskModal-<%=task.id%>" aria-haspopup="true" class="modal-button button is-small is-white has-text-link">
                         Reopen Task
                       </a>
+                      <%= render partial: '/shared/review_tasks_modal', locals: { task: task } %>
 
                       <% else %>
 
                         <a data-target="#reviewTaskModal-<%=task.id%>" aria-haspopup="true" class="modal-button button is-small is-warning">
                           Review Task
                         </a>
+
+                      <%= render partial: '/shared/review_tasks_modal', locals: { task: task } %>
 
                       <% end %>
 

@@ -7,7 +7,7 @@
       <p class="modal-card-title">Create a new task for <%= @product.name%> <%= @version.version_number %></p>
       <button class="delete" aria-label="close"></button>
     </header>
-    <section class="modal-card-body">
+    <div class="modal-card-body">
       <div class="container has-text-centered">
 
         <%= form_tag product_version_tasks_path(@product.slug, @version.version_number) do %>
@@ -65,13 +65,15 @@
           </div>
         </div>
 
-      </div>
-    </section>
-    <div class="modal-card-foot pt-4">
-      <%= submit_tag "Create task", class: 'button is-success is-outlined has-text-centered is-pulled-right', id: 'submit-signup' %>
-      <% end %>
+        <div class="is-pulled-right">
+          <%= submit_tag "Create task", class: 'button is-success is-outlined has-text-centered is-pulled-right', id: 'submit-signup' %>
+          <% end %>
 
+        </div>
+
+      </div>
     </div>
+
   </div>
 </div>
 

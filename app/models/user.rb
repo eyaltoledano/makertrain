@@ -99,7 +99,6 @@ class User < ApplicationRecord
   def tasks_for_review
     items_to_review = []
     self.versions.each do |version|
-
       version.tasks.each do |task|
         items_to_review << task if task.status == "Ready for Review" || task.status == "Reviewing" || task.status == "PR Submitted" || task.status == "Accepted"
       end
