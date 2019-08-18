@@ -26,7 +26,7 @@
             </td>
             <td><%= link_to product.user.name, user_path(product.user) %></td>
             <td>
-              <%= render partial: '/shared/progress_bar', locals: {product: product} %>
+              <%= render partial: '/shared/progress_bar', locals: {product: product, version: product.latest_version} %>
             </td>
             <td><%= link_to "#{money(product.latest_version.available_rewards)}", product_version_path(product.slug, product.latest_version_number), class: 'tag is-success is-bold' %></td>
             <td>

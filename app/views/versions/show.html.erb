@@ -3,7 +3,7 @@
 <div class="card mt-4">
   <div class="card-body">
     <p class="heading">Version Progress</p>
-    <%= render partial: '/shared/progress_bar', locals: {product: @version.product} %>
+    <%= render partial: '/shared/progress_bar', locals: {product: @version.product, version: @version} %>
   </div>
 </div>
 
