@@ -1,3 +1,6 @@
+# class-level scope method
+# user-submittable attribute on a join model
+
 class User < ApplicationRecord
   has_secure_password
   has_many :products
