@@ -30,6 +30,8 @@ gem 'pagy'
 gem 'oj'
 gem 'inline_svg'
 
+gem 'rails-erd'
+
 group :product do
   gem 'pg'
 end

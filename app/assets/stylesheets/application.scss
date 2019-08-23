@@ -1,6 +1,10 @@
 @import "bootstrap";
 @import "bootstrap/mixins";
 
+input.form-control .field_with_errors {
+  border: 1px;
+  border-color: red;
+}
 
  #id_indicator {
    margin-right: 170%;

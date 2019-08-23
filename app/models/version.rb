@@ -2,7 +2,7 @@ class Version < ApplicationRecord
   belongs_to :user
   belongs_to :product
   has_many :version_users
-  has_many :users, through: :version_users
+  has_many :users, through: :version_users #products?
   has_many :tasks
 
   def slug
