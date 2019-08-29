@@ -1,16 +1,14 @@
-# class-level scope method
-# user-submittable attribute on a join model
-
 class User < ApplicationRecord
   has_secure_password
   has_many :products
-  has_many :version_users
-  has_many :versions, through: :version_users #products?
+  has_many :versions
+  has_many :tasks
+  has_many :contributed_versions, through: :tasks, source: :version
+
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :username, presence: true
   validates :username, uniqueness: true
-
 
   def name
     self.display_name? ? self.display_name : self.username
@@ -25,12 +23,24 @@ class User < ApplicationRecord
   	self.username.gsub(" ", "-").downcase
   end
 
+  def contributed_versions
+    contributed_versions.uniq
+  end
+
   def has_no_products?
     true if self.products.empty?
   end
 
   def self.find_by_slug(slug)
   	self.all.find{ |instance| instance.slug == slug }
+  end
+
+  def completed_claimed_tasks
+    claimed_tasks.where(status: 'Completed')
+  end
+
+  def completed_claimed_tasks_count
+    completed_claimed_tasks.count
   end
 
   def claimed_tasks # outputs array of tasks
@@ -89,16 +99,6 @@ class User < ApplicationRecord
       rewards << task.reward.to_f if task.status == "Accepted"
     end
     rewards.inject(0, :+)
-  end
-
-  def versions
-    versions = []
-    self.products.each do |product|
-      product.versions.each do |version|
-        versions << version
-      end
-    end
-    versions
   end
 
   def tasks_for_review

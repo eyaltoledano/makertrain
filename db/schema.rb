@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190815020723) do
+ActiveRecord::Schema.define(version: 20190829160154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,13 +52,6 @@ ActiveRecord::Schema.define(version: 20190815020723) do
     t.string   "display_name"
     t.integer  "weekly_goal"
     t.string   "slug"
-  end
-
-  create_table "version_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "version_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "versions", force: :cascade do |t|
