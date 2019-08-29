@@ -5,11 +5,12 @@
 
         <div class="column">
           <nav class="level">
+
             <div class="level-item has-text-centered">
               <div>
-                <p class="heading">Claimed Tasks</p>
-                <p class="title has-text-weight-semibold">
-                  <%= @user.claimed_tasks_count %>
+                <p class="heading">Claimed Tasks Value</p>
+                <p class="title has-text-success has-text-weight-semibold">
+                  <%= money(@user.claimed_task_value) %>
                 </p>
               </div>
             </div>
@@ -25,9 +26,18 @@
 
             <div class="level-item has-text-centered">
               <div>
-                <p class="heading">Claimed Tasks Value</p>
-                <p class="title has-text-success has-text-weight-semibold">
-                  <%= money(@user.claimed_task_value) %>
+                <p class="heading">Claimed Tasks</p>
+                <p class="title has-text-weight-semibold">
+                  <%= @user.claimed_tasks_count %>
+                </p>
+              </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Completed Tasks</p>
+                <p class="title has-text-weight-semibold">
+                  <%= @user.completed_claimed_tasks_count %>
                 </p>
               </div>
             </div>
@@ -37,6 +47,15 @@
                 <p class="heading">Pending Rewards</p>
                 <p class="<%= pending_balance_class_name %>">
                   <%= money(@user.pending_balance) %>
+                </p>
+              </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Account Balance</p>
+                <p class="tag is-dark is-large">
+                  <%= money(@user.balance) %>
                 </p>
               </div>
             </div>

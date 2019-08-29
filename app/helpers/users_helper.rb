@@ -8,7 +8,7 @@ module UsersHelper
 
   def tasks_to_work_on_text
     if @user.open_claimed_tasks.count > 1
-      "You have #{@user.open_claimed_tasks.count} claimed tasks to work on"
+      "You have #{@user.open_claimed_tasks.count} open claimed tasks to work on"
     elsif @user.open_claimed_tasks.count == 1
       "You have 1 open claimed task to work on"
     else
