@@ -3,7 +3,8 @@ class Version < ApplicationRecord
   belongs_to :product
 
   has_many :tasks
-  has_many :contributing_users, through: :tasks, source: :user
+
+  has_many :contributing_users, -> { distinct }, through: :tasks, source: :user
 
   def slug
     self.name.gsub(" ", "-").downcase.gsub(".", "-").gsub("'", "-")
@@ -11,10 +12,6 @@ class Version < ApplicationRecord
 
   def self.find_by_slug(slug)
   	self.all.find{ |instance| instance.slug == slug }
-  end
-
-  def contributing_users
-    contributing_users.uniq
   end
 
   def open_tasks

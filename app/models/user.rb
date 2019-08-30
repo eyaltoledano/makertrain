@@ -3,7 +3,9 @@ class User < ApplicationRecord
   has_many :products
   has_many :versions
   has_many :tasks
-  has_many :contributed_versions, through: :tasks, source: :version
+  has_many :contributed_versions, -> { distinct }, through: :tasks, source: :version
+
+  has_many :contributed_products, -> { distinct }, through: :tasks, source: :product
 
   validates :email, uniqueness: true
   validates :email, presence: true
@@ -21,10 +23,6 @@ class User < ApplicationRecord
 
   def slug
   	self.username.gsub(" ", "-").downcase
-  end
-
-  def contributed_versions
-    contributed_versions.uniq
   end
 
   def has_no_products?
