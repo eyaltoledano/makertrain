@@ -7,7 +7,7 @@ end
 
 gem 'bootstrap', '~> 4.0.0'
 gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
